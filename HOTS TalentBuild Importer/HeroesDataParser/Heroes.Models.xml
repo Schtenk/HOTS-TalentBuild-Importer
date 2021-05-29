@@ -1,0 +1,2803 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Heroes.Models</name>
+    </assembly>
+    <members>
+        <member name="T:Heroes.Models.AbilityTalents.Ability">
+            <summary>
+            Contains the information for ability data.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Heroes.Models.AbilityTalents.Ability"/> class.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.#ctor(Heroes.Models.AbilityTalents.AbilityTalentBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Heroes.Models.AbilityTalents.Ability"/> class.
+            </summary>
+            <param name="talentBase">An <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentBase"/> object.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="talentBase"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Ability.Tier">
+            <summary>
+            Gets or sets the tier of the ability.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Ability.TalentIdUpgrades">
+            <summary>
+            Gets a unique collection of talent ids that are associated with the ability.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.op_Equality(Heroes.Models.AbilityTalents.Ability,Heroes.Models.AbilityTalents.Ability)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.op_Inequality(Heroes.Models.AbilityTalents.Ability,Heroes.Models.AbilityTalents.Ability)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.Equals(Heroes.Models.AbilityTalents.Ability)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Ability.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.AbilityTalentBase">
+            <summary>
+            Abtract class that contains informations related to both abilities and talents.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.Name">
+            <summary>
+            Gets or sets the real name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.AbilityTalentId">
+            <summary>
+            Gets or sets the abilityTalent id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.IconFileName">
+            <summary>
+            Gets or sets the icon file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.IsQuest">
+            <summary>
+            Gets or sets a value indicating whether the abilityTalent is a quest.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the abilityTalent is activable through a hotkey.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.ParentLink">
+            <summary>
+            Gets or sets the parent that is associated with this abilityTalent.
+            </summary>
+            <remarks>Useful for abilities only.</remarks>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.Tooltip">
+            <summary>
+            Gets or sets the <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentTooltip"/> object.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentBase.CreatedUnits">
+            <summary>
+            Gets a unique collection of created units.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentBase.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.AbilityTalentId">
+            <summary>
+            Contains the neccessary properties for a unique identifier for abilites and talents.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/> class.
+            </summary>
+            <param name="referenceId">The ability id.</param>
+            <param name="buttonId">The button id.</param>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentId.Id">
+            <summary>
+            Gets the unique id. Same as <see cref="M:Heroes.Models.AbilityTalents.AbilityTalentId.ToString"/>.
+            <br/>
+            Id is as follows: <see cref="P:Heroes.Models.AbilityTalents.AbilityTalentId.ReferenceId"/>|<see cref="P:Heroes.Models.AbilityTalents.AbilityTalentId.ButtonId"/>|<see cref="P:Heroes.Models.AbilityTalents.AbilityTalentId.AbilityType"/>|<see cref="P:Heroes.Models.AbilityTalents.AbilityTalentId.IsPassive"/>.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentId.ReferenceId">
+            <summary>
+            Gets or sets the reference id. This is usually the ability id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentId.ButtonId">
+            <summary>
+            Gets or sets the button id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentId.AbilityType">
+            <summary>
+            Gets or sets the abilityType.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentId.IsPassive">
+            <summary>
+            Gets or sets a value indicating whether this is a passive ability.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.op_Equality(Heroes.Models.AbilityTalents.AbilityTalentId,Heroes.Models.AbilityTalents.AbilityTalentId)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.op_Inequality(Heroes.Models.AbilityTalents.AbilityTalentId,Heroes.Models.AbilityTalents.AbilityTalentId)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.Equals(Heroes.Models.AbilityTalents.AbilityTalentId)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentId.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.AbilityTalentTooltip">
+            <summary>
+            Contains the all information for ability and talent tooltips.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentTooltip.Energy">
+            <summary>
+            Gets or sets the Energy properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentTooltip.Life">
+            <summary>
+            Gets or sets the Life properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentTooltip.Cooldown">
+            <summary>
+            Gets or sets the Cooldown properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentTooltip.Charges">
+            <summary>
+            Gets or sets the Charges properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentTooltip.ShortTooltip">
+            <summary>
+            Gets or sets the short tooltip.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.AbilityTalentTooltip.FullTooltip">
+            <summary>
+            Gets or sets the full tooltip.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentTooltip.GetTalentSubInfo">
+            <summary>
+            Returns a string of the ability or talent's cooldown and mana or life cost.
+            </summary>
+            <returns>A string containing the talent sub information.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.AbilityTalentTooltip.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.AbilityTiers">
+            <summary>
+            Specifices the tier of an ability.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Unknown">
+            <summary>
+            Indicates an unknown tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Basic">
+            <summary>
+            Indicates a basic tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Heroic">
+            <summary>
+            Indicates a heroic tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Trait">
+            <summary>
+            Indicates a trait tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Mount">
+            <summary>
+            Indicates a mount tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Activable">
+            <summary>
+            Indicates an activable tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Hearth">
+            <summary>
+            Indicates a hearth tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Taunt">
+            <summary>
+            Indicates a taunt tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Dance">
+            <summary>
+            Indicates a dance tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Spray">
+            <summary>
+            Indicates a spray tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Voice">
+            <summary>
+            Indicates a voice tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.MapMechanic">
+            <summary>
+            Indicates a map mechanic tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Interact">
+            <summary>
+            Indicates an interact tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Action">
+            <summary>
+            Indicates an action tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Hidden">
+            <summary>
+            Indicates a hidden tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Standard">
+            <summary>
+            Indicates a standard tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Special">
+            <summary>
+            Indicates a special tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTiers.Misc">
+            <summary>
+            Indicates a misc tier.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.AbilityTypes">
+            <summary>
+            Specifices the type of an ability.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Unknown">
+            <summary>
+            Indicates an unknown type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Q">
+            <summary>
+            Indicates a Q type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.W">
+            <summary>
+            Indicates a W type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.E">
+            <summary>
+            Indicates am E type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Heroic">
+            <summary>
+            Indicates a heroic type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Z">
+            <summary>
+            Indicates a Z type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Trait">
+            <summary>
+            Indicates a trait type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Active">
+            <summary>
+            Indicates an active type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Passive">
+            <summary>
+            Indicates a passive type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.B">
+            <summary>
+            Indicates a B type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Attack">
+            <summary>
+            Indicates an attack type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Stop">
+            <summary>
+            Indicates a stop type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Hold">
+            <summary>
+            Indicates a hold type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Cancel">
+            <summary>
+            Indicates a cancel type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Interact">
+            <summary>
+            Indicates an interact type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Taunt">
+            <summary>
+            Indicates a taunt type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Dance">
+            <summary>
+            Indicates a dance type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Spray">
+            <summary>
+            Indicates a spray type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Voice">
+            <summary>
+            Indicates a voice type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.ForceMove">
+            <summary>
+            Indicates a force move type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.MapMechanic">
+            <summary>
+            Indicates a map mechanic type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Hidden">
+            <summary>
+            Indicates a hidden type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Standard">
+            <summary>
+            Indicates a standard type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Special">
+            <summary>
+            Indicates a special type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.AbilityTypes.Misc">
+            <summary>
+            Indicates a misc type.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.Talent">
+            <summary>
+            Contains the information for talent data.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Heroes.Models.AbilityTalents.Talent"/> class.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Talent.Tier">
+            <summary>
+            Gets or sets the tier of the talent.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Talent.Column">
+            <summary>
+            Gets or sets the column number, also known as the sort index number.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Talent.AbilityTalentLinkIds">
+            <summary>
+            Gets a unique collection of ability and talent ids that the talent affects or upgrades.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Talent.PrerequisiteTalentIds">
+            <summary>
+            Gets a unique collection of prerequisite talent ids.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.op_Equality(Heroes.Models.AbilityTalents.Talent,Heroes.Models.AbilityTalents.Talent)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.op_Inequality(Heroes.Models.AbilityTalents.Talent,Heroes.Models.AbilityTalents.Talent)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.Equals(Heroes.Models.AbilityTalents.Talent)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Talent.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.TalentTiers">
+            <summary>
+            Specifies the tier of a talent.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Old">
+            <summary>
+            Indicates the tier does not exist, is unknown, or has no tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level1">
+            <summary>
+            Indicates a level 1 tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level4">
+            <summary>
+            Indicates a level 4 tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level7">
+            <summary>
+            Indicates a level 7 tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level10">
+            <summary>
+            Indicates a level 10 tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level13">
+            <summary>
+            Indicates a level 13 tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level16">
+            <summary>
+            Indicates a level 16 tier.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.AbilityTalents.TalentTiers.Level20">
+            <summary>
+            Indicates a level 20 tier.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges">
+            <summary>
+            Contains the information related to the charges.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.CountMax">
+            <summary>
+            Gets or sets the maximum amount of charges, null if no charges available.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.CountStart">
+            <summary>
+            Gets or sets the starting amount of charges, null if no charges available.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.CountUse">
+            <summary>
+            Gets or sets the amount of charges consumed on use.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.RecastCooldown">
+            <summary>
+            Gets or sets the cooldown between charge casts.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.IsHideCount">
+            <summary>
+            Gets or sets if charges are hidden.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.HasCharges">
+            <summary>
+            Gets a value indicating whether charges exists.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Tooltip.TooltipCharges.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.Tooltip.TooltipCooldown">
+            <summary>
+            Contains the information releated to cooldown tooltip.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCooldown.CooldownTooltip">
+            <summary>
+            Gets or sets the cooldown text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipCooldown.ToggleCooldown">
+            <summary>
+            Gets or sets the toggle cooldown.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Tooltip.TooltipCooldown.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.Tooltip.TooltipEnergy">
+            <summary>
+            Contains the information releated to the energy tooltip.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipEnergy.EnergyTooltip">
+            <summary>
+            Gets or sets the energy text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipEnergy.EnergyValue">
+            <summary>
+            Gets or sets the energy value.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Tooltip.TooltipEnergy.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.AbilityTalents.Tooltip.TooltipLife">
+            <summary>
+            Contains the information releated to the life tooltip.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipLife.LifeCostTooltip">
+            <summary>
+            Gets or sets the health text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.AbilityTalents.Tooltip.TooltipLife.LifeValue">
+            <summary>
+            Gets or sets the life value.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.AbilityTalents.Tooltip.TooltipLife.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.Announcer">
+            <summary>
+            Contains the information for announcer data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the announcers.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.AttributeId">
+            <summary>
+            Gets or sets the attribute id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.ReleaseDate">
+            <summary>
+            Gets or sets the release date of the announcer.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.CollectionCategory">
+            <summary>
+            Gets or sets the type of collection category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.ImageFileName">
+            <summary>
+            Gets or sets the image file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.Gender">
+            <summary>
+            Gets or sets the gender of the announcer.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Announcer.HeroId">
+            <summary>
+            Gets or sets the hero associated with the announcer.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Banner">
+            <summary>
+            Contains the information for banner data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the hero banners.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.AttributeId">
+            <summary>
+            Gets or sets the attribute id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.ReleaseDate">
+            <summary>
+            Gets or sets the release date of the banner.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.CollectionCategory">
+            <summary>
+            Gets or sets the type of collection category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Banner.EventName">
+            <summary>
+            Gets or sets the event name associated with this banner.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.BehaviorVeterancy">
+            <summary>
+            Contains the information for behavior veterancy data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.BehaviorVeterancy.CombineModifications">
+            <summary>
+            Gets or sets a value indicating whether this is a combine modification type.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.BehaviorVeterancy.CombineXP">
+            <summary>
+            Gets or sets a value indicating whether this is a combine xp type.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.BehaviorVeterancy.VeterancyLevels">
+            <summary>
+            Gets the collection of veterancy levels.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.BehaviorVeterancy.IsMapUnique">
+            <summary>
+            Gets a value indicating whether this is unique to a map.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.BehaviorVeterancy.MapName">
+            <summary>
+            Gets or sets the map name that is associated with this veterancy.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Boost">
+            <summary>
+            Contains the information for boost data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Boost.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the boosts.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Boost.ReleaseDate">
+            <summary>
+            Gets or sets the release date of the boost.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Boost.EventName">
+            <summary>
+            Gets or sets the event name associated with this boost.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Bundle">
+            <summary>
+            Contains the information for bundle data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the bundles.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.ReleaseDate">
+            <summary>
+            Gets or sets the release date of the bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.Franchise">
+            <summary>
+            Gets or sets the franchise the bundle belongs to.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.ImageFileName">
+            <summary>
+            Gets or sets the bundle image.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.EventName">
+            <summary>
+            Gets or sets the event name associated with this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.IsDynamicContent">
+            <summary>
+            Gets or sets a value indicating whether this is dynamic content.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.HeroIds">
+            <summary>
+            Gets a unique collection of hero ids that are in this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.MountIds">
+            <summary>
+            Gets a unique collection of mount ids that are in this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.BoostBonusId">
+            <summary>
+            Gets or sets the boost id that is in this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.GoldBonus">
+            <summary>
+            Gets or sets the amount of gold in this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.GemsBonus">
+            <summary>
+            Gets or sets the amount of gems in this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.LootChestBonus">
+            <summary>
+            Gets or sets the loot chest id that is in this bundle.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.HeroSkins">
+            <summary>
+            Gets a collection of hero skin ids.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.HeroSkinsCount">
+            <summary>
+            Gets the amount of hero skins.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.HeroIdsWithHeroSkins">
+            <summary>
+            Gets a collection of hero ids that have a hero skin associated with it.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Bundle.HeroIdsWithHeroSkinsCount">
+            <summary>
+            Gets the amount of hero ids that have a hero skin associated with it.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.Bundle.AddHeroSkin(System.String,System.String)">
+            <summary>
+            Adds hero skin id along with its associated hero id.
+            </summary>
+            <param name="heroId">The hero id.</param>
+            <param name="heroSkinId">The skin id.</param>
+            <exception cref="T:System.ArgumentException">The <paramref name="heroId"/> or <paramref name="heroSkinId"/> is <see langword="null"/> or empty.</exception>
+        </member>
+        <member name="M:Heroes.Models.Bundle.ContainsHeroSkinId(System.String)">
+            <summary>
+            Determines whether the value exists.
+            </summary>
+            <param name="heroSkinId">The hero skin id.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="heroSkinId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Bundle.GetSkinIdsByHeroId(System.String)">
+            <summary>
+            Gets a collection of hero skins ids from the <paramref name="heroId"/>.
+            </summary>
+            <param name="heroId">The hero id of the skins.</param>
+            <returns>A collection of hero skins ids of the <paramref name="heroId"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="heroId"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"><paramref name="heroId"/> was not found.</exception>
+        </member>
+        <member name="M:Heroes.Models.Bundle.TryGetSkinIdsByHeroId(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            Gets a collection of hero skins ids from the <paramref name="heroId"/>.
+            </summary>
+            <param name="heroId">The hero id of the skins.</param>
+            <param name="heroSkinIds">A collection of hero skins ids associated with the <paramref name="heroId"/>.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="heroId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="T:Heroes.Models.DescriptionType">
+            <summary>
+            Specifies the tooltip description type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.RawDescription">
+            <summary>
+            Indicates raw description.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.PlainText">
+            <summary>
+            Indicates plain text.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.PlainTextWithNewlines">
+            <summary>
+            Indicates plain text with new lines.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.PlainTextWithScaling">
+            <summary>
+            Indicates plain text with scaling.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.PlainTextWithScalingWithNewlines">
+            <summary>
+            Indicates plain text with scaling with new lines.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.ColoredText">
+            <summary>
+            Indicates colored text.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.DescriptionType.ColoredTextWithScaling">
+            <summary>
+            Indicates colored text with scaling.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.DescriptionValidator">
+            <summary>
+            Provides methods to validate gamestrings and modify them into different verbiage.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.DescriptionValidator.Validate(System.String)">
+            <summary>
+            Takes a gamestring and removes unmatched and modifies nested tags into unnested tags.
+            </summary>
+            <param name="gameString">The gamestring text.</param>
+            <returns>A modified gamestring.</returns>
+        </member>
+        <member name="M:Heroes.Models.DescriptionValidator.GetPlainText(System.String,System.Boolean,System.Boolean,Heroes.Models.Localization)">
+            <summary>
+            Returns a plain text string without any tags.
+            </summary>
+            <param name="gameString">The gamestring text.</param>
+            <param name="includeNewLineTags">If true, includes the newline tags.</param>
+            <param name="includeScaling">If true, includes the scaling info.</param>
+            <param name="scaleLocale">Locale for the per level string.</param>
+            <returns>A modified gamestring.</returns>
+        </member>
+        <member name="M:Heroes.Models.DescriptionValidator.GetColoredText(System.String,System.Boolean,Heroes.Models.Localization)">
+            <summary>
+            Returns the string with all tags.
+            </summary>
+            <param name="gameString">The gamestring text.</param>
+            <param name="includeScaling">If true, includes the scaling info.</param>
+            <param name="scaleLocale">Locale for the per level string.</param>
+            <returns>A modified gamestring.</returns>
+        </member>
+        <member name="M:Heroes.Models.DescriptionValidator.TryParseScalingTag(System.String@,System.Boolean)">
+            <summary>
+            Parse the scaling tag, removes the tag or replaces it.
+            </summary>
+            <param name="scaleText">The scale text.</param>
+            <param name="replace">If true, replace the tag, else return an empty string.</param>
+        </member>
+        <member name="M:Heroes.Models.DescriptionValidator.TryParseErrorTag(System.String@)">
+            <summary>
+            Parses the error tag by removing it. Error tags are ##TEXT##.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Emoticon">
+            <summary>
+            Contains the information for emoticon data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.DescriptionLocked">
+            <summary>
+            Gets or sets the description locked text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.UniversalAliases">
+            <summary>
+            Gets a unique collection of universal aliases for the emoticon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.LocalizedAliases">
+            <summary>
+            Gets a unique collection of localized aliases for the emoticon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.SearchTexts">
+            <summary>
+            Gets a unique collection of search texts for the emoticon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.IsAliasCaseSensitive">
+            <summary>
+            Gets or sets a value indicating whether the aliases are case sensitive.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.IsHidden">
+            <summary>
+            Gets or sets a value indicating whether the emoticon is hidden.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.HeroId">
+            <summary>
+            Gets or sets the hero id associated with the emoticon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.HeroSkinId">
+            <summary>
+            Gets or sets the hero skin id assoicated with the emoticon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.TextureSheet">
+            <summary>
+            Gets or sets the texture sheet associated with the emoticon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Emoticon.Image">
+            <summary>
+            Gets or sets the image properties of the emoticon.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.EmoticonImage">
+            <summary>
+            Contains the information for emoticon image.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonImage.FileName">
+            <summary>
+            Gets or sets the file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonImage.Index">
+            <summary>
+            Gets or sets the index of the image in the texture sheet.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonImage.Width">
+            <summary>
+            Gets or sets the width of the image.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonImage.Count">
+            <summary>
+            Gets or sets the amount of frames.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonImage.DurationPerFrame">
+            <summary>
+            Gets or sets the duration per frame.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.EmoticonImage.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.EmoticonPack">
+            <summary>
+            Contains the information for emoticon pack data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the emoticon packs.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.ReleaseDate">
+            <summary>
+            Gets or sets the release date.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.CollectionCategory">
+            <summary>
+            Gets or sets the type of collection category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.EventName">
+            <summary>
+            Gets or sets the event name associated with this emoticon pack.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.EmoticonPack.EmoticonIds">
+            <summary>
+            Gets a unique collection of emoticons ids in this emoticon pack.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Extensions.EnumExtensions">
+            <summary>
+            Static class for enum extension.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.Extensions.EnumExtensions.GetFriendlyName``1(``0)">
+            <summary>
+            Returns the friendly name of the enum.
+            </summary>
+            <typeparam name="T">The type of the enumeration.</typeparam>
+            <param name="enumerationValue">An enumeration value.</param>
+            <returns>The value of the <see cref="T:System.ComponentModel.DescriptionAttribute"/>.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="enumerationValue"/> is not of <typeparamref name="T"/> type or is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Extensions.EnumExtensions.ConvertToEnum``1(System.String)">
+            <summary>
+            Convert the string to an enumeration type.
+            </summary>
+            <typeparam name="T">The enumeration type to be converted to.</typeparam>
+            <param name="value">The string to be converted.</param>
+            <returns>The <typeparamref name="T"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Extensions.EnumExtensions.TryConvertToEnum``1(System.String,``0@)">
+            <summary>
+            Convert the string to an enumeration type.
+            </summary>
+            <typeparam name="T">The enumeration type to be converted to.</typeparam>
+            <param name="value">The string to be converted.</param>
+            <param name="result">When this method returns, contains the <typeparamref name="T"/>.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="T:Heroes.Models.ExtractableBase`1">
+            <summary>
+            Base class that provides basic information for extractable game data.
+            </summary>
+            <typeparam name="T">A type of <see cref="T:Heroes.Models.IExtractable"/>.</typeparam>
+        </member>
+        <member name="P:Heroes.Models.ExtractableBase`1.Id">
+            <summary>
+            Gets or sets the unique id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.ExtractableBase`1.HyperlinkId">
+            <summary>
+            Gets or sets the hyperlink id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.ExtractableBase`1.Name">
+            <summary>
+            Gets or sets the real in game name.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.ExtractableBase`1.op_Equality(Heroes.Models.ExtractableBase{`0},Heroes.Models.ExtractableBase{`0})">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.ExtractableBase`1.op_Inequality(Heroes.Models.ExtractableBase{`0},Heroes.Models.ExtractableBase{`0})">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.ExtractableBase`1.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.ExtractableBase`1.Equals(Heroes.Models.ExtractableBase{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.ExtractableBase`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.ExtractableBase`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.Franchise">
+            <summary>
+            Specifies the type of hero franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Unknown">
+            <summary>
+            Indicates a unknown franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Classic">
+            <summary>
+            Indicates a classic franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Diablo">
+            <summary>
+            Indicates a Diablo franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Overwatch">
+            <summary>
+            Indicates an Overwatch franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Starcraft">
+            <summary>
+            Indicates a Starcraft franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Warcraft">
+            <summary>
+            Indicates a Warcraft franchise.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Franchise.Nexus">
+            <summary>
+            Indicates a Nexus franchise.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Hero">
+            <summary>
+            Contains the information for hero data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.CHeroId">
+            <summary>
+            Gets or sets the id of CHero element stored in blizzard xml file.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.AttributeId">
+            <summary>
+            Gets or sets the four character code.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Difficulty">
+            <summary>
+            Gets or sets the difficulty of the hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Franchise">
+            <summary>
+            Gets or sets the franchise the hero belongs to.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.HeroPortrait">
+            <summary>
+            Gets or sets the hero portraits.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.ReleaseDate">
+            <summary>
+            Gets or sets the date the hero was release.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Rarity">
+            <summary>
+            Gets or sets the rarity of the hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Ratings">
+            <summary>
+            Gets or sets the ratings of the hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Talents">
+            <summary>
+            Gets a collection of talents.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.TalentsCount">
+            <summary>
+            Gets the amount of talents.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.TalentIds">
+            <summary>
+            Gets a collection of talent ids.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.TalentIdsCount">
+            <summary>
+            Gets the amount of talent ids.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Roles">
+            <summary>
+            Gets a unique collection roles of the hero, multiclass will be first if hero has multiple roles.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.ExpandedRole">
+            <summary>
+            Gets or sets the expanded role of the hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Title">
+            <summary>
+            Gets or sets the hero title.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.SearchText">
+            <summary>
+            Gets or sets the search text. Space delimited.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.Type">
+            <summary>
+            Gets or sets the unit type: Melee or ranged.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.SkinIds">
+            <summary>
+            Gets a unique collection of <see cref="T:Heroes.Models.HeroSkin"/> ids that are associated with this hero. This are usually a different model.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.VariationSkinIds">
+            <summary>
+            Gets a unique collection of <see cref="T:Heroes.Models.HeroSkin"/> ids that are associated with this hero. This are usually just texture variations of the same model.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.VoiceLineIds">
+            <summary>
+            Gets a unique colection of <see cref="T:Heroes.Models.VoiceLine"/> ids that are associated with this hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.UsesMount">
+            <summary>
+            Gets a value indicating whether this hero uses a mount.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.DefaultMountId">
+            <summary>
+            Gets or sets the default mount id of this hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.AllowedMountCategoryIds">
+            <summary>
+            Gets a unique collection of <see cref="P:Heroes.Models.Mount.MountCategory"/> ids that this hero is allowed to use.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Hero.HeroUnits">
+            <summary>
+            Gets a unique collection of <see cref="T:Heroes.Models.Hero"/> objects.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.Hero.TierTalents(Heroes.Models.AbilityTalents.TalentTiers)">
+            <summary>
+            Returns a collection of all the talents in the selected tier.
+            </summary>
+            <param name="tier"> The talent tier.</param>
+            <returns>A collection of <see cref="T:Heroes.Models.AbilityTalents.Talent"/>s.</returns>
+        </member>
+        <member name="M:Heroes.Models.Hero.AddTalent(Heroes.Models.AbilityTalents.Talent)">
+            <summary>
+            Adds an <see cref="T:Heroes.Models.AbilityTalents.Talent"/>. Replaces if object already exists in collection.
+            </summary>
+            <param name="talent">A <see cref="T:Heroes.Models.AbilityTalents.Talent"/> object.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="talent"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="talent"/> <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/> is null.</exception>
+        </member>
+        <member name="M:Heroes.Models.Hero.ContainsTalent(System.String)">
+            <summary>
+            Determines whether the value exists.
+            </summary>
+            <param name="talentId">The reference id of the talent.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="talentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Hero.TryGetTalent(System.String,Heroes.Models.AbilityTalents.Talent@)">
+            <summary>
+            Looks for a talent with the given <paramref name="talentId"/>, returning a value that indicates whether such value exists.
+            </summary>
+            <param name="talentId">The reference id of the talent.</param>
+            <param name="talent">The <see cref="T:Heroes.Models.AbilityTalents.Talent"/> object of the <paramref name="talentId"/>.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="talentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Hero.GetTalent(System.String)">
+            <summary>
+            Returns a talent from the talent id.
+            </summary>
+            <param name="talentId">The reference id of the talent.</param>
+            <returns>A <see cref="T:Heroes.Models.AbilityTalents.Talent"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="talentId"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"><paramref name="talentId"/> was not found.</exception>
+        </member>
+        <member name="M:Heroes.Models.Hero.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.HeroPortrait">
+            <summary>
+            Contains the properties for hero portraits.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.HeroSelectPortraitFileName">
+            <summary>
+            Gets or sets the hero select portrait file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.LeaderboardPortraitFileName">
+            <summary>
+            Gets or sets the score screen portrait file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.LoadingScreenPortraitFileName">
+            <summary>
+            Gets or sets the loading screen portrait file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.PartyPanelPortraitFileName">
+            <summary>
+            Gets or sets the part panel portrait file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.TargetPortraitFileName">
+            <summary>
+            Gets or sets the target portrait file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.DraftScreenFileName">
+            <summary>
+            Gets or sets the draft screen file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroPortrait.PartyFrameFileName">
+            <summary>
+            Gets the party frame file name.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.HeroRatings">
+            <summary>
+            Contains the properties for hero ratings.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroRatings.Damage">
+            <summary>
+            Gets or sets the damage rating.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroRatings.Utility">
+            <summary>
+            Gets or sets the utility rating.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroRatings.Survivability">
+            <summary>
+            Gets or sets the survivability rating.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroRatings.Complexity">
+            <summary>
+            Gets or sets the complexity rating.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.HeroRatings.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.HeroSkin">
+            <summary>
+            Contains the information for hero skin data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the hero skins.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.InfoText">
+            <summary>
+            Gets or sets the info text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.SearchText">
+            <summary>
+            Gets or sets the search text. Space delimited.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.AttributeId">
+            <summary>
+            Gets or sets the attribute id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.ReleaseDate">
+            <summary>
+            Gets or sets the release date of the skin.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.Features">
+            <summary>
+            Gets a unique collection of features.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.VariationSkinIds">
+            <summary>
+            Gets a unique collection of <see cref="T:Heroes.Models.HeroSkin"/> ids. This are usually just texture variations of the same model.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.VoiceLineIds">
+            <summary>
+            Gets a unique colection of <see cref="T:Heroes.Models.VoiceLine"/> ids that are associated with this hero skin.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.HeroSkin.Franchise">
+            <summary>
+            Gets or sets the franchise the hero skin belongs to.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.IExtractable">
+            <summary>
+            Provides basic properties that are used across all extractable model types from the game data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.IExtractable.Id">
+            <summary>
+            Gets or sets the unique id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.IExtractable.HyperlinkId">
+            <summary>
+            Gets or sets the hyperlink id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.IExtractable.Name">
+            <summary>
+            Gets or sets the full name.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.IMapSpecific">
+            <summary>
+            Provides the properties that are associated with map specific models.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.IMapSpecific.IsMapUnique">
+            <summary>
+            Gets a value indicating whether this object is unique to a map.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.IMapSpecific.MapName">
+            <summary>
+            Gets or sets the map name that is associated this object.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Localization">
+            <summary>
+            Specifies the localization.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.ENUS">
+            <summary>
+            Indicates English locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.DEDE">
+            <summary>
+            Indicates German locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.ESES">
+            <summary>
+            Indicates Spanish (EU) locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.ESMX">
+            <summary>
+            Indicates Spanish (AL) locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.FRFR">
+            <summary>
+            Indicates French locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.ITIT">
+            <summary>
+            Indicates Italian locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.KOKR">
+            <summary>
+            Indicates Korean locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.PLPL">
+            <summary>
+            Indicates Polish locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.PTBR">
+            <summary>
+            Indicates Portuguese locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.RURU">
+            <summary>
+            Indicates Russian locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.ZHCN">
+            <summary>
+            Indicates Chinese locale.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Localization.ZHTW">
+            <summary>
+            Indicates Chinese (TW) locale.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.LootChest">
+            <summary>
+            Contains the information for loot chest data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.LootChest.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.LootChest.MaxRerolls">
+            <summary>
+            Gets or sets the maximum numbers of re-rolls for this loot chest.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.LootChest.TypeDescription">
+            <summary>
+            Gets or sets the type description id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.LootChest.EventName">
+            <summary>
+            Gets or sets the event name associated with this loot chest.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.LootChest.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.MatchAward">
+            <summary>
+            Contains the information for match award data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.MatchAward.MVPScreenImageFileName">
+            <summary>
+            Gets or sets the MVP screen image file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.MatchAward.ScoreScreenImageFileName">
+            <summary>
+            Gets or sets the score screen image file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.MatchAward.Description">
+            <summary>
+            Gets or sets the award description.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.MatchAward.Tag">
+            <summary>
+            Gets or sets the unique tag.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.MatchAward.MVPScreenImageFileNameOriginal">
+            <summary>
+            Gets or sets the MVP screen image original file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.MatchAward.ScoreScreenImageFileNameOriginal">
+            <summary>
+            Gets or sets the score screen image original file name.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Mount">
+            <summary>
+            Contains the information for mount data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the mounts.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.InfoText">
+            <summary>
+            Gets or sets the info text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.SearchText">
+            <summary>
+            Gets or sets the search text. Space delimited.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.AttributeId">
+            <summary>
+            Gets or sets the attribute id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.ReleaseDate">
+            <summary>
+            Gets or sets the release date of the mount.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.MountCategory">
+            <summary>
+            Gets or sets the type of mount category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.CollectionCategory">
+            <summary>
+            Gets or sets the type of collection category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.EventName">
+            <summary>
+            Gets or sets the event name associated with this mount.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.VariationMountIds">
+            <summary>
+            Gets a unique collection of <see cref="T:Heroes.Models.Mount"/> ids. This are usually just texture variations of the same model.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Mount.Franchise">
+            <summary>
+            Gets or sets the franchise the mount belongs to.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.PortraitPack">
+            <summary>
+            Contains the information for portrait data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.PortraitPack.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the portrait.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.PortraitPack.RewardPortraitIds">
+            <summary>
+            Gets a unique collection of reward portrait ids in the portrait pack.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.PortraitPack.EventName">
+            <summary>
+            Gets or sets the event name associated with this portrait.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.PortraitPack.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Rarity">
+            <summary>
+            Specifies the type of rarity.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Rarity.Unknown">
+            <summary>
+            Indicates that the rarity is unknown.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Rarity.None">
+            <summary>
+            Indicates that there is no rarity.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Rarity.Common">
+            <summary>
+            Indicates a common rarity.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Rarity.Rare">
+            <summary>
+            Indicates a rare rarity.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Rarity.Epic">
+            <summary>
+            Indicates an epic rarity.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.Rarity.Legendary">
+            <summary>
+            Indicates a legendary rarity.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.RewardBase">
+            <summary>
+            Contain the information for reward.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardBase.Description">
+            <summary>
+            Gets or sets the earned description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardBase.DescriptionUnearned">
+            <summary>
+            Gets or sets the unearned description text.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.RewardPortrait">
+            <summary>
+            Contains the information for reward portrait data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.TextureSheet">
+            <summary>
+            Gets or sets the texture sheet associated with the portrait.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.CollectionCategory">
+            <summary>
+            Gets or sets the type of collection category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.PortraitPackId">
+            <summary>
+            Gets or sets the portrait pack id associated with the reward portrait.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.IconSlot">
+            <summary>
+            Gets or sets the icon slot number on the <see cref="P:Heroes.Models.RewardPortrait.TextureSheet"/>. Zero index based.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.HeroId">
+            <summary>
+            Gets or sets the hero id associated with the reward portrait.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.RewardPortrait.ImageFileName">
+            <summary>
+            Gets or sets the image file name.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Spray">
+            <summary>
+            Contains the information for spray data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the hero banners.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.SearchText">
+            <summary>
+            Gets or sets the search text. Space delimited.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.AttributeId">
+            <summary>
+            Gets or sets the attribute id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.ReleaseDate">
+            <summary>
+            Gets or sets the release date.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.CollectionCategory">
+            <summary>
+            Gets or sets the type of collection category.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.EventName">
+            <summary>
+            Gets or sets the event name associated with this spray.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.ImageFileName">
+            <summary>
+            Gets or sets the image file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.TextureSheet">
+            <summary>
+            Gets or sets the texture sheet associated with the spray.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.AnimationCount">
+            <summary>
+            Gets or sets the animation count.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Spray.AnimationDuration">
+            <summary>
+            Gets or sets the animation duration.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.TextureSheet">
+            <summary>
+            Contains the properties for a texture sheet.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TextureSheet.Image">
+            <summary>
+            Gets or sets the image.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TextureSheet.Rows">
+            <summary>
+            Gets or sets the number of rows in the texture sheet.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TextureSheet.Columns">
+            <summary>
+            Gets or sets the number of column in the texture sheet.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.TooltipDescription">
+            <summary>
+            Contains the information for tooltip descriptions which are automatically validated and provide multiple verbiage.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.TooltipDescription.ErrorTag">
+            <summary>
+            The error tag string.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.#ctor(System.String,Heroes.Models.Localization)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Heroes.Models.TooltipDescription"/> class.
+            </summary>
+            <param name="description">A parsed description that has not been modified into a readable verbiage. Description does not have to be pre-validated.</param>
+            <param name="scaleLocale">The <see cref="T:Heroes.Models.Localization"/> for the scale text.</param>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.RawDescription">
+            <summary>
+            <para>Gets the raw validated description. Unmatched tags have been removed and nested tag have been modified into unnested tags.</para>
+            <para>Contains the color tags &lt;c val=\"#TooltipNumbers\"&gt;&lt;/c&gt;, scaling data ~~x~~, and newlines &lt;n/&gt;. It can also contain error tags ##ERROR##.</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals &lt;c val=\"#TooltipNumbers\"&gt;200~~0.04~~&lt;/c&gt; damage.&lt;n/&gt;Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.PlainText">
+            <summary>
+            <para>Gets the validated description with text only.</para>
+            <para>No color tags, scaling info, or newlines. Newlines are replaced with a double space.</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals 200 damage.  Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.PlainTextWithNewlines">
+            <summary>
+            <para>Gets the validated description with text only.</para>
+            <para>Same as <see cref="P:Heroes.Models.TooltipDescription.PlainText"/> but contains newlines.</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals 200 damage.&lt;n/&gt;Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.PlainTextWithScaling">
+            <summary>
+            <para>Gets the validated description with text only.</para>
+            <para>Same as <see cref="P:Heroes.Models.TooltipDescription.PlainText"/> but contains the scaling info (+x% per level).</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals 200 (+4% per level) damage.  Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.PlainTextWithScalingWithNewlines">
+            <summary>
+            <para>Gets the validated description with text only.</para>
+            <para>Same as <see cref="P:Heroes.Models.TooltipDescription.PlainTextWithScaling"/> but contains the newlines.</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals 200 (+4% per level) damage.&lt;n/&gt;Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.ColoredText">
+            <summary>
+            <para>Gets the validated description with colored tags and new lines, when parsed this is what appears ingame for tooltip.</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals &lt;c val=\"#TooltipNumbers\"&gt;200&lt;/c&gt; damage.&lt;n/&gt;Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.ColoredTextWithScaling">
+            <summary>
+            <para>Gets the validated description with colored tags, newlines, and scaling info.</para>
+            <para>Same as <see cref="P:Heroes.Models.TooltipDescription.ColoredText"/> but contains the scaling info (+x% per level).</para>
+            <para>
+            Example:<br/>
+            Fires a laser that deals &lt;c val=\"#TooltipNumbers\"&gt;200 (+4% per level)&lt;/c&gt; damage.&lt;n/&gt;Does not affect minions.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.HasErrorTag">
+            <summary>
+            Gets a value indicating whether the raw description contains an error tag.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TooltipDescription.ScaleLocale">
+            <summary>
+            Gets the <see cref="T:Heroes.Models.Localization"/> used for the scale text.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.op_Equality(Heroes.Models.TooltipDescription,Heroes.Models.TooltipDescription)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.op_Inequality(Heroes.Models.TooltipDescription,Heroes.Models.TooltipDescription)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.Equals(Heroes.Models.TooltipDescription)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.TooltipDescription.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.TypeDescription">
+            <summary>
+            Contains the information for type description data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TypeDescription.TextureSheet">
+            <summary>
+            Gets or sets the texture sheet associated with the type description.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TypeDescription.IconSlot">
+            <summary>
+            Gets or sets the icon slot number on the <see cref="P:Heroes.Models.TypeDescription.TextureSheet"/>. Zero index based.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TypeDescription.ImageFileName">
+            <summary>
+            Gets or sets the image file name.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.TypeValue">
+            <summary>
+            Represents the base class for type value pairs data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TypeValue.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.TypeValue.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.TypeValue.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.Unit">
+            <summary>
+            Contains the information for unit data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.CUnitId">
+            <summary>
+            Gets or sets the id of CUnit element stored in blizzard xml file.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Description">
+            <summary>
+            Gets or sets the description of the unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.InfoText">
+            <summary>
+            Gets or sets the info text of the unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.HeroDescriptors">
+            <summary>
+            Gets a unique collection of the hero play styles.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Life">
+            <summary>
+            Gets or sets the Life properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Energy">
+            <summary>
+            Gets or sets the Energy properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Shield">
+            <summary>
+            Gets or sets the Shield properties.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Armor">
+            <summary>
+            Gets a collection unit armor.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Radius">
+            <summary>
+            Gets or sets the size of the radius.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.InnerRadius">
+            <summary>
+            Gets or sets the size of the inner radius.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Speed">
+            <summary>
+            Gets or sets the value of the speed.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Sight">
+            <summary>
+            Gets or sets the distance of the sight.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Gender">
+            <summary>
+            Gets or sets the gender of the hero.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Abilities">
+            <summary>
+            Gets a collection of abilities.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.AbilitiesCount">
+            <summary>
+            Gets the amount of abilities.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Weapons">
+            <summary>
+            Gets a unique collection of basic attack weapons.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.Attributes">
+            <summary>
+            Gets a unique collection of attributes.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.UnitIds">
+            <summary>
+            Gets a unique collection of additional units associated with this unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.ParentLink">
+            <summary>
+            Gets or sets the parent link of this unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.DamageType">
+            <summary>
+            Gets or sets the damage type of this unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.IsMapUnique">
+            <summary>
+            Gets a value indicating whether this unit is unique to a map.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.MapName">
+            <summary>
+            Gets or sets the map name that is associated with this unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.ScalingBehaviorLink">
+            <summary>
+            Gets or sets the scaling behavior link.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.KillXP">
+            <summary>
+            Gets or sets the kill xp.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Unit.UnitPortrait">
+            <summary>
+            Gets or sets the unit portraits.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.Unit.PrimaryAbilities">
+            <summary>
+            Returns a collection of all the primary abilities (no parent linked abilities).
+            </summary>
+            <returns>A collection of abilities.</returns>
+        </member>
+        <member name="M:Heroes.Models.Unit.PrimaryAbilities(Heroes.Models.AbilityTalents.AbilityTiers)">
+            <summary>
+            Returns a collection of all the primary abilities in the selected tier (no parent linked abilities).
+            </summary>
+            <param name="tier">The ability tier.</param>
+            <returns>A collection of abilities.</returns>
+        </member>
+        <member name="M:Heroes.Models.Unit.SubAbilities">
+            <summary>
+            Returns a collection of all the sub abilities.
+            </summary>
+            <returns>A collection of abilities.</returns>
+        </member>
+        <member name="M:Heroes.Models.Unit.SubAbilities(Heroes.Models.AbilityTalents.AbilityTiers)">
+            <summary>
+            Returns a collection of all the sub abilities in the selected tier.
+            </summary>
+            <param name="tier">The ability tier.</param>
+            <returns>A collection of abilities.</returns>
+        </member>
+        <member name="M:Heroes.Models.Unit.ParentLinkedAbilities">
+            <summary>
+            Returns a lookup of all the parent linked abilities.
+            </summary>
+            <returns>A lookup of the parent linked abilities.</returns>
+        </member>
+        <member name="M:Heroes.Models.Unit.ParentLinkedWeapons">
+            <summary>
+            Returns a lookup of all the parent linked weapons.
+            </summary>
+            <returns>A lookup of the parent linked weapons.</returns>
+        </member>
+        <member name="M:Heroes.Models.Unit.AddAbility(Heroes.Models.AbilityTalents.Ability)">
+            <summary>
+            Adds an <see cref="T:Heroes.Models.AbilityTalents.Ability"/>. Returns a value indicating the result.
+            </summary>
+            <param name="ability">An <see cref="T:Heroes.Models.AbilityTalents.Ability"/>.</param>
+            <returns><see langword="true"/> if the value was added; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="ability"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="ability"/> <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.ContainsAbility(Heroes.Models.AbilityTalents.Ability)">
+            <summary>
+            Determines whether the value exists.
+            </summary>
+            <param name="ability">An <see cref="T:Heroes.Models.AbilityTalents.Ability"/>.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="ability"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="ability"/> <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.ContainsAbility(Heroes.Models.AbilityTalents.AbilityTalentId)">
+            <summary>
+            Determines whether the value exists.
+            </summary>
+            <param name="abilityTalentId">An <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/>.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="abilityTalentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.ContainsAbility(System.String,System.StringComparison)">
+            <summary>
+            Determines whether the value exists.
+            </summary>
+            <param name="referenceId">The reference id of the <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/>.</param>
+            <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="referenceId"/> is null or empty.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.RemoveAbility(Heroes.Models.AbilityTalents.Ability)">
+            <summary>
+            Removes an <see cref="T:Heroes.Models.AbilityTalents.Ability"/>.
+            </summary>
+            <param name="ability">An <see cref="T:Heroes.Models.AbilityTalents.Ability"/>.</param>
+            <returns><see langword="true"/> if the value was removed; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.InvalidOperationException"><paramref name="ability"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="ability"/> <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.GetAbility(Heroes.Models.AbilityTalents.AbilityTalentId)">
+            <summary>
+            Gets the ability from the <paramref name="abilityTalentId"/>.
+            </summary>
+            <param name="abilityTalentId">An <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/>.</param>
+            <returns>An <see cref="T:Heroes.Models.AbilityTalents.Ability"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="abilityTalentId"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"><paramref name="abilityTalentId"/> was not found.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.TryGetAbility(Heroes.Models.AbilityTalents.AbilityTalentId,Heroes.Models.AbilityTalents.Ability@)">
+            <summary>
+            Looks for an ability from the given <paramref name="abilityTalentId"/>, returning a value that indicates whether such value exists.
+            </summary>
+            <param name="abilityTalentId">The <see cref="T:Heroes.Models.AbilityTalents.AbilityTalentId"/> to look for.</param>
+            <param name="ability">The <see cref="T:Heroes.Models.AbilityTalents.Ability"/> that is found.</param>
+            <returns><see langword="true"/> if the value was found; otherwise <see langword="false"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="abilityTalentId"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.GetAbilitiesFromReferenceId(System.String,System.StringComparison)">
+            <summary>
+            Returns a collection of abilities from an <see cref="P:Heroes.Models.AbilityTalents.AbilityTalentId.ReferenceId"/>.
+            </summary>
+            <param name="referenceId">The reference id value to look for.</param>
+            <param name="comparisonType">One of the enumeration values that specifies how the strings will be compared.</param>
+            <returns>A collection of <see cref="T:Heroes.Models.AbilityTalents.Ability"/>.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="referenceId"/> is null or empty.</exception>
+        </member>
+        <member name="M:Heroes.Models.Unit.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.UnitArmor">
+            <summary>
+            Contains the information related to unit armor.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitArmor.Type">
+            <summary>
+            Gets or sets the type of armor (Hero, Merc, etc...)
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitArmor.BasicArmor">
+            <summary>
+            Gets or sets the physical (basic) armor.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitArmor.AbilityArmor">
+            <summary>
+            Gets or sets the Spell (ability) armor.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitArmor.SplashArmor">
+            <summary>
+            Gets or sets the Splash armor.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.UnitArmor.op_Equality(Heroes.Models.UnitArmor,Heroes.Models.UnitArmor)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.UnitArmor.op_Inequality(Heroes.Models.UnitArmor,Heroes.Models.UnitArmor)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.UnitArmor.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.UnitArmor.Equals(Heroes.Models.UnitArmor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.UnitArmor.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.UnitArmor.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.UnitEnergy">
+            <summary>
+            Contains the information related to unit energy.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitEnergy.EnergyMax">
+            <summary>
+            Gets or sets the amount of Energy the unit has (mana, brew, fury...).
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitEnergy.EnergyRegenerationRate">
+            <summary>
+            Gets or sets the energy regeneration rate of the unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitEnergy.EnergyType">
+            <summary>
+            Gets or sets the energy type.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.UnitEnergy.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.UnitGender">
+            <summary>
+            Specifies the type of unit gender.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.UnitGender.Neutral">
+            <summary>
+            Indicates neutral.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.UnitGender.Male">
+            <summary>
+            Indicates male.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.UnitGender.Female">
+            <summary>
+            Indicates female.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.UnitLife">
+            <summary>
+            Contains information related to unit life.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitLife.LifeMax">
+            <summary>
+            Gets or sets the amount of life the unit has.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitLife.LifeRegenerationRate">
+            <summary>
+            Gets or sets the life regeneration rate of the unit.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitLife.LifeScaling">
+            <summary>
+            Gets or sets the life scaling.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitLife.LifeRegenerationRateScaling">
+            <summary>
+            Gets or sets the life regeneration rate scaling.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitLife.LifeType">
+            <summary>
+            Gets or sets the life type.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.UnitLife.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.UnitPortrait">
+            <summary>
+            Contains the properties for a unit's portrait.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitPortrait.TargetInfoPanelFileName">
+            <summary>
+            Gets or sets the target info panel file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitPortrait.MiniMapIconFileName">
+            <summary>
+            Gets or sets the minimap icon file name.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.UnitShield">
+            <summary>
+            Contains the information related to a unit shield.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitShield.ShieldMax">
+            <summary>
+            Gets or sets the max number of shields the unit has.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitShield.ShieldScaling">
+            <summary>
+            Gets or sets the shield scaling.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitShield.ShieldRegenerationDelay">
+            <summary>
+            Gets or sets the shield regeneration delay.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitShield.ShieldRegenerationRate">
+            <summary>
+            Gets or sets the shiled regneration rate.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitShield.ShieldRegenerationRateScaling">
+            <summary>
+            Gets or sets the shield regeneration rate scaling.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitShield.ShieldType">
+            <summary>
+            Gets or sets the type of shield.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.UnitShield.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.UnitType">
+            <summary>
+            Specifies the basic attack type of the unit.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.UnitType.Unknown">
+            <summary>
+            Indicates an unknown basic attack type.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.UnitType.Melee">
+            <summary>
+            Indicates a melee unit.
+            </summary>
+        </member>
+        <member name="F:Heroes.Models.UnitType.Ranged">
+            <summary>
+            Indicates a ranged unit.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.UnitWeapon">
+            <summary>
+            Contains the information related to unit weapon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.WeaponNameId">
+            <summary>
+            Gets or sets the unique id of the weapon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.Name">
+            <summary>
+            Gets or sets the name of the weapon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.Damage">
+            <summary>
+            Gets or sets the amount of damage the attack deals.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.AttributeFactors">
+            <summary>
+            Gets the collection of attribute factors.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.Period">
+            <summary>
+            Gets or sets the time between attacks.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.Range">
+            <summary>
+            Gets or sets the distance of the attack.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.DamageScaling">
+            <summary>
+            Gets or sets the damage scaling per level.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.ParentLink">
+            <summary>
+            Gets or sets the unit that is associated with this weapon.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.UnitWeapon.AttacksPerSecond">
+            <summary>
+            Gets the attacks per second.
+            </summary>
+            <returns>A value indicating the number of attacks per second.</returns>
+        </member>
+        <member name="M:Heroes.Models.UnitWeapon.op_Equality(Heroes.Models.UnitWeapon,Heroes.Models.UnitWeapon)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.UnitWeapon.op_Inequality(Heroes.Models.UnitWeapon,Heroes.Models.UnitWeapon)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.UnitWeapon.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.UnitWeapon.Equals(Heroes.Models.UnitWeapon)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.UnitWeapon.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.UnitWeapon.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyDamageDealtFraction">
+            <summary>
+            Represents a type value pair for veterancy damage dealt fraction.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyDamageDealtScaled">
+            <summary>
+            Represents a type value pair for veterancy damage dealt scaled.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyLevel">
+            <summary>
+            Contains the information releated to veterancy levels.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyLevel.MinimumVeterancyXP">
+            <summary>
+            Gets or sets the minimum xp for this level.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyLevel.VeterancyModification">
+            <summary>
+            Gets or sets the veterancy modification.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.Veterancy.VeterancyLevel.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyModification">
+            <summary>
+            Contains the informatino related to the modications for veterancies.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.KillXpBonus">
+            <summary>
+            Gets or sets the kill xp bonus.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.VitalMaxCollection">
+            <summary>
+            Gets the collection of vital max modifications.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.VitalMaxFractionCollection">
+            <summary>
+            Gets the collection of vital max fraction modifications.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.VitalRegenCollection">
+            <summary>
+            Gets the collection of vital regen modifications.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.VitalRegenFractionCollection">
+            <summary>
+            Gets the collection of vital regen fraction modifications.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.DamageDealtScaledCollection">
+            <summary>
+            Gets the collection of damage dealt scaled modifications.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.Veterancy.VeterancyModification.DamageDealtFractionCollection">
+            <summary>
+            Gets the collection of damage dealt fraction modifications.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyVitalMax">
+            <summary>
+            Represents a type value pair for veterancy vital max.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyVitalMaxFraction">
+            <summary>
+            Represents a type value pair for veterancy max fraction.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyVitalRegen">
+            <summary>
+            Represents a type value pair for veterancy vital regen.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.Veterancy.VeterancyVitalRegenFraction">
+            <summary>
+            Represents a type value pair for veterancy vital regen fraction.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.VoiceLine">
+            <summary>
+            Contains the information for voice line data.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.SortName">
+            <summary>
+            Gets or sets the sort name used for sorting the voice lines.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.Description">
+            <summary>
+            Gets or sets the description text.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.AttributeId">
+            <summary>
+            Gets or sets the attribute id.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.ReleaseDate">
+            <summary>
+            Gets or sets the release date.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.ImageFileName">
+            <summary>
+            Gets or sets the image file name.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.HeroId">
+            <summary>
+            Gets or sets the hero id associated with the voiceline.
+            </summary>
+        </member>
+        <member name="P:Heroes.Models.VoiceLine.Rarity">
+            <summary>
+            Gets or sets the rarity.
+            </summary>
+        </member>
+        <member name="T:Heroes.Models.WeaponAttributeFactor">
+            <summary>
+            Represents a type value pair for the attribute factor of a weapon.
+            </summary>
+        </member>
+        <member name="M:Heroes.Models.WeaponAttributeFactor.op_Equality(Heroes.Models.WeaponAttributeFactor,Heroes.Models.WeaponAttributeFactor)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.WeaponAttributeFactor.op_Inequality(Heroes.Models.WeaponAttributeFactor,Heroes.Models.WeaponAttributeFactor)">
+            <summary>
+            Compares the <paramref name="left"/> value to the <paramref name="right"/> value and determines if they are not equal.
+            </summary>
+            <param name="left">The left hand side of the operator.</param>
+            <param name="right">The right hand side of the operator.</param>
+            <returns><see langword="true"/> if the <paramref name="left"/> value is not equal to the <paramref name="right"/> value; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Heroes.Models.WeaponAttributeFactor.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.WeaponAttributeFactor.Equals(Heroes.Models.WeaponAttributeFactor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.WeaponAttributeFactor.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Heroes.Models.WeaponAttributeFactor.ToString">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
