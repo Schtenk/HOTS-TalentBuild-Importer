@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "HOTS_TalenBuild_Fetcher_Service": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

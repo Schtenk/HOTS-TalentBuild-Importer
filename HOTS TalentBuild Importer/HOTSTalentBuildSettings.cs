@@ -8,18 +8,15 @@ namespace HOTS_TalentBuild_Importer
 {
     public class HOTSTalentBuildSettings: Settings<HOTSTalentBuildSettings>
     {
-        //public readonly static HOTSTalentBuildSettings SettingsInstance = SettingsService<HOTSTalentBuildSettings>.Instance;
-        
-        public string HOTSPATH { get; set; }
+        public string ConnectionString { get; set; }
         public string[] SelectedHeroes { get; set; }
         public string SelectedVersion { get; set; }
         public string[] SelectedRanks { get; set; }
         public int SelectedNumberOfBuilds {get; set; }
-      
 
         public override void SetDefaults()
         {
-            HOTSPATH = "";
+            ConnectionString = "server=steinwalls.synology.me;user id=root;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=FktP^7Ls^pa!J4^!2TYJ;";
             SelectedHeroes = new string[] { "ALL" };
             SelectedVersion = "Minor";
             SelectedRanks = new string[] { "Master", "Diamond", "Platinum" };

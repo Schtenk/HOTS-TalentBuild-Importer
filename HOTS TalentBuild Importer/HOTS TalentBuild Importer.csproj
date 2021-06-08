@@ -19,49 +19,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SchtenksFramework\SchtenksFramework\SchtenksFramework.csproj" />
+    <ProjectReference Include="..\HOTS TalentBuild Lib\HOTS TalentBuild Lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="chromedriver.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\CascLib.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\dataoverrides\hero-overrides.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\dataoverrides\hero-overrides_75792.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\dataoverrides\hero-overrides_78725.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\dataoverrides\hero-overrides_81376.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\dataoverrides\matchaward-overrides.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\dataoverrides\unit-overrides.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\Heroes.Models.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\Heroes.Models.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\heroesdata.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\portrait-auto-extract.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="HeroesDataParser\verifyignore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="icon.ico">
