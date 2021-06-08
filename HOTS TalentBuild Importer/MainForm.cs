@@ -1,5 +1,6 @@
-﻿using HOTS_TalentBuild_Importer.Models;
+﻿using HOTS_TalentBuild_Lib.Models;
 using HOTS_TalentBuild_Importer.Services;
+using HOTS_TalentBuild_Lib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace HOTS_TalentBuild_Importer
         public MainForm()
         {
             InitializeComponent();
+            HOTSTalentBuildContext.ConnectionString = SettingsInstance.ConnectionString;
         }
         private void ImportBtn_Click(object sender, EventArgs e)
         {
@@ -80,7 +82,7 @@ namespace HOTS_TalentBuild_Importer
                 foreach (var account in Directory.GetDirectories(Constants.HOTSDocumentPath))
                 {
                     using var stream = new StreamWriter($"{account}\\TalentBuilds.txt", false);
-                    stream.Write(talentBuildsString); 
+                    stream.Write(talentBuildsString);
                 }
             }
             StatusLbl.Text = Constants.DefaultStatus;
@@ -90,10 +92,6 @@ namespace HOTS_TalentBuild_Importer
         {
             ImportBtn.Enabled = enable;
             CancelBtn.Enabled = !enable;
-            if (!string.IsNullOrEmpty(SettingsInstance.HOTSPATH))
-            {
-                HeroUpdateBtn.Enabled = enable;
-            }
         }
 
         private void RanksBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,13 +118,7 @@ namespace HOTS_TalentBuild_Importer
 
 
         private void MainForm_Load(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(SettingsInstance.HOTSPATH))
-            {
-                HeroUpdateBtn.Enabled = true;
-                HeroUpdateBtn.Visible = true;
-            }
-
+        { 
             var lastUpdated = DateTime.MinValue;
             using (var db = new HOTSTalentBuildContext())
             {
@@ -148,7 +140,7 @@ namespace HOTS_TalentBuild_Importer
         {
             EnableButtons(false);
             StatusLbl.Text = "Extracting Hero Data (See Command Prompt For Progress)";
-            DataFetcher.FetchHeroes();
+            //DataFetcher.FetchHeroes();
             StatusLbl.Text = Constants.DefaultStatus;
             using (var db = new HOTSTalentBuildContext())
             {

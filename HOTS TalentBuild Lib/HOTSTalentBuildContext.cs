@@ -1,12 +1,17 @@
-﻿using HOTS_TalentBuild_Importer.Models;
+﻿using HOTS_TalentBuild_Lib.Models;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
-using static HOTS_TalentBuild_Importer.Models.Versions;
+using static HOTS_TalentBuild_Lib.Models.Versions;
 
-namespace HOTS_TalentBuild_Importer
+namespace HOTS_TalentBuild_Lib
 {
     public class HOTSTalentBuildContext : DbContext
     {
+        public static string ConnectionString;
+        public HOTSTalentBuildContext ()
+        {
+        }
+        
         public DbSet<MajorVersion> MajorVersions { get; set; }
         public DbSet<MinorVersion> MinorVersions { get; set; }
         public DbSet<GeneralData> GeneralDatas { get; set; }
@@ -15,8 +20,8 @@ namespace HOTS_TalentBuild_Importer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=steinwalls.synology.me;user id=root;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=FktP^7Ls^pa!J4^!2TYJ;"
-                , ServerVersion.AutoDetect("server=steinwalls.synology.me;user id=root;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=FktP^7Ls^pa!J4^!2TYJ;"));
+            optionsBuilder.UseMySql(ConnectionString
+                , ServerVersion.AutoDetect(ConnectionString));
             optionsBuilder.EnableSensitiveDataLogging();
         }
 

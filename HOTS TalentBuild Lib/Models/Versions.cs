@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace HOTS_TalentBuild_Importer.Models
+namespace HOTS_TalentBuild_Lib.Models
 {
     public static class  Versions
     {

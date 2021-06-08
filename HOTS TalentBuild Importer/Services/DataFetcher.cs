@@ -1,5 +1,6 @@
 ﻿using HOTS_TalentBuild_Importer.Extensions;
-using HOTS_TalentBuild_Importer.Models;
+using HOTS_TalentBuild_Lib;
+using HOTS_TalentBuild_Lib.Models;
 using HtmlAgilityPack;
 using Microsoft.EntityFrameworkCore.Internal;
 using OpenQA.Selenium;
@@ -70,74 +71,74 @@ namespace HOTS_TalentBuild_Importer.Services
             db.GeneralDatas.AddOrUpdate(new GeneralData { Name = Versions.ModelName, LastUpdated = DateTime.Now }, e => e.Name == Versions.ModelName);
             db.SaveChanges();
         }
-        public static void FetchHeroes()
-        {
-            if (!string.IsNullOrEmpty(SettingsInstance.HOTSPATH))
-            {
-                var path = $"{Application.StartupPath}\\HeroesDataParser\\";
-                var outputPath = $"{path}output\\";
-                try
-                {
-                    using var process = new Process();
-                    var startInfo = new ProcessStartInfo($"{path}heroesdata.exe")
-                    {
-                        Arguments = $"\"{SettingsInstance.HOTSPATH}\" -e heroesdata --json -o \"{outputPath}",
-                        UseShellExecute = true
-                    };
-                    process.StartInfo = startInfo;
-                    process.Start();
-                    process.WaitForExit();
-                    if (process.ExitCode != 0) { throw new Exception("Something Failed While Extracting Heroes Data"); }
+        //public static void FetchHeroes()
+        //{
+        //    if (!string.IsNullOrEmpty(SettingsInstance.HOTSPATH))
+        //    {
+        //        var path = $"{Application.StartupPath}\\HeroesDataParser\\";
+        //        var outputPath = $"{path}output\\";
+        //        try
+        //        {
+        //            using var process = new Process();
+        //            var startInfo = new ProcessStartInfo($"{path}heroesdata.exe")
+        //            {
+        //                Arguments = $"\"{SettingsInstance.HOTSPATH}\" -e heroesdata --json -o \"{outputPath}",
+        //                UseShellExecute = true
+        //            };
+        //            process.StartInfo = startInfo;
+        //            process.Start();
+        //            process.WaitForExit();
+        //            if (process.ExitCode != 0) { throw new Exception("Something Failed While Extracting Heroes Data"); }
 
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"HeroesDataParser: {e} - {e.Message}");
-                    return;
-                }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            MessageBox.Show($"HeroesDataParser: {e} - {e.Message}");
+        //            return;
+        //        }
 
-                var heroes = new Dictionary<string, string>();
-                try
-                {
-                    var filePath = Directory.GetFiles($"{outputPath}\\json\\")[0];
+        //        var heroes = new Dictionary<string, string>();
+        //        try
+        //        {
+        //            var filePath = Directory.GetFiles($"{outputPath}\\json\\")[0];
 
-                    var jsonString = File.ReadAllText(filePath);
-                    var document = JsonDocument.Parse(jsonString);
-                    foreach (var c in document.RootElement.EnumerateObject())
-                    {
-                        var heroId = c.Name;
-                        var heroName = c.Value.EnumerateObject().SingleOrDefault(e => e.Name == "name").Value.ToString(); ;
-                        heroes.Add(heroName, heroId);
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"JSON Data: {e} - {e.Message}");
-                    return;
-                }
-                if (GeneralDataHtml == null) GetGeneralData();
-                using var db = new HOTSTalentBuildContext();
-                var html = GeneralDataHtml;
-                var heroesSelect = html.CssSelect("#hero");
-                foreach (var option in heroesSelect.CssSelect("option"))
-                {
-                    var hotsProfileName = option.GetAttributeValue("value");
-                    var name = WebUtility.UrlDecode(hotsProfileName);
-                    db.Heroes.AddIfMissing(new Hero()
-                    {
-                        HeroID = heroes[name],
-                        Name = name,
-                        HotsProfileName = hotsProfileName
-                    });
-                }
-                db.GeneralDatas.AddOrUpdate(new GeneralData { Name = Hero.ModelName, LastUpdated = DateTime.Now }, e => e.Name == Hero.ModelName);
-                db.SaveChanges();
-            }
-            else
-            {
-                MessageBox.Show("No Heroes of the Storm path set, you can ignore this option :)");
-            }
-        }
+        //            var jsonString = File.ReadAllText(filePath);
+        //            var document = JsonDocument.Parse(jsonString);
+        //            foreach (var c in document.RootElement.EnumerateObject())
+        //            {
+        //                var heroId = c.Name;
+        //                var heroName = c.Value.EnumerateObject().SingleOrDefault(e => e.Name == "name").Value.ToString(); ;
+        //                heroes.Add(heroName, heroId);
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            MessageBox.Show($"JSON Data: {e} - {e.Message}");
+        //            return;
+        //        }
+        //        if (GeneralDataHtml == null) GetGeneralData();
+        //        using var db = new HOTSTalentBuildContext(SettingsInstance.ConnectionString);
+        //        var html = GeneralDataHtml;
+        //        var heroesSelect = html.CssSelect("#hero");
+        //        foreach (var option in heroesSelect.CssSelect("option"))
+        //        {
+        //            var hotsProfileName = option.GetAttributeValue("value");
+        //            var name = WebUtility.UrlDecode(hotsProfileName);
+        //            db.Heroes.AddIfMissing(new Hero()
+        //            {
+        //                HeroID = heroes[name],
+        //                Name = name,
+        //                HotsProfileName = hotsProfileName
+        //            });
+        //        }
+        //        db.GeneralDatas.AddOrUpdate(new GeneralData { Name = Hero.ModelName, LastUpdated = DateTime.Now }, e => e.Name == Hero.ModelName);
+        //        db.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("No Heroes of the Storm path set, you can ignore this option :)");
+        //    }
+        //}
 
         public class FetchTalentBuildsArgs
         {
