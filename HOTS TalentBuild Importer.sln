@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchtenksFramework", "..\Sch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HOTS TalentBuild Lib", "HOTS TalentBuild Lib\HOTS TalentBuild Lib.csproj", "{E9B6C659-F3BE-4D83-BB58-4E48B542724A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HOTS TalentBuild Fetcher Service", "..\HOTS TalentBuild Fetcher Service\HOTS TalentBuild Fetcher Service\HOTS TalentBuild Fetcher Service.csproj", "{7A2F9DE6-31DB-4639-B535-972D3CEF4F2E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{E9B6C659-F3BE-4D83-BB58-4E48B542724A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9B6C659-F3BE-4D83-BB58-4E48B542724A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9B6C659-F3BE-4D83-BB58-4E48B542724A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A2F9DE6-31DB-4639-B535-972D3CEF4F2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A2F9DE6-31DB-4639-B535-972D3CEF4F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A2F9DE6-31DB-4639-B535-972D3CEF4F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A2F9DE6-31DB-4639-B535-972D3CEF4F2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
