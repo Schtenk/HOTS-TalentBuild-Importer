@@ -1,5 +1,4 @@
 ﻿using HOTS_TalentBuild_Lib.Models;
-using HOTS_TalentBuild_Importer.Services;
 using HOTS_TalentBuild_Lib;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using static SchtenksFramework.Services.Settings<HOTS_TalentBuild_Importer.HOTSTalentBuildSettings>;
+using System.Text.RegularExpressions;
 
 namespace HOTS_TalentBuild_Importer
 {
@@ -20,16 +20,67 @@ namespace HOTS_TalentBuild_Importer
             InitializeComponent();
             HOTSTalentBuildContext.ConnectionString = SettingsInstance.ConnectionString;
         }
+
+        class Build
+        {
+            public string HeroID;
+            public string Selected;
+            public string Build1 = "\"\"";
+            public string Build2 = "\"\"";
+            public string Build3 = "\"\"";
+        }
+
+        Dictionary<string, List<Build>> CurrentBuilds = new Dictionary<string, List<Build>>();
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            using (var db = new HOTSTalentBuildContext())
+            {
+                HeroesBox.Items.AddRange(db.Heroes.Select(h => h.Name).ToArray());
+            }
+
+            RanksBox.Items.AddRange(LibConstants.Ranks.ToArray());
+
+            var Buildselectors = TalentBuildFetcher.BuildSelectors.Keys.ToArray();
+            Build1Box.Items.AddRange(Buildselectors);
+            Build2Box.Items.AddRange(Buildselectors);
+            Build3Box.Items.AddRange(Buildselectors);
+
+            foreach (var account in Directory.GetDirectories(LibConstants.HOTSDocumentPath))
+            {
+                if (File.Exists($"{account}\\TalentBuilds.txt"))
+                {
+                    var lines  = File.ReadAllLines($"{account}\\TalentBuilds.txt");
+                    CurrentBuilds.Add(account, new List<Build>());
+                    foreach (var line in lines)
+                    {
+                        var match = Regex.Match(line, "(\\w+)=(\\w+)\\|(\\d+)\\|(\\d+)\\|(\\d+)\\|");
+                        CurrentBuilds[account].Add(new Build()
+                        {
+                            HeroID = match.Groups[1].Value,
+                            Selected = match.Groups[2].Value,
+                            Build1 = match.Groups[3].Value,
+                            Build2 = match.Groups[4].Value,
+                            Build3 = match.Groups[5].Value,
+                        });
+                    }
+                }
+            }
+
+            LoadSettings();
+            Build1Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
+            Build2Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
+            Build3Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
+        }
+
         private void ImportBtn_Click(object sender, EventArgs e)
         {
             Import();
         }
         private void Import()
         {
-            EnableButtons(false);
             var heroes = HeroesBox.CheckedItems.Cast<string>().ToList();
             var ranks = RanksBox.CheckedItems.Cast<string>().ToList();
-            var version = VersionTypeBox.Text;
             if (heroes.Count < 1)
             {
                 MessageBox.Show("No Heroes Selected!");
@@ -40,58 +91,29 @@ namespace HOTS_TalentBuild_Importer
                 MessageBox.Show("No Ranks Selected!");
                 return;
             }
-            StatusLbl.Text = Constants.FetchingTalenBuildStatus;
-            TalentBuildBgWorker.RunWorkerAsync(new DataFetcher.FetchTalentBuildsArgs
+            using var db = new HOTSTalentBuildContext();
+            var HeroeIds = db.Heroes.Select(h => h.HeroID).ToList();
+            var builds1 = TalentBuildFetcher.FetchTalentBuilds(Build1Box.Text, heroes, ranks);
+            var builds2 = TalentBuildFetcher.FetchTalentBuilds(Build2Box.Text, heroes, ranks);
+            var builds3 = TalentBuildFetcher.FetchTalentBuilds(Build3Box.Text, heroes, ranks);
+            foreach (var account in Directory.GetDirectories(LibConstants.HOTSDocumentPath))
             {
-                Heroes = heroes,
-                Ranks = ranks,
-                Version = version
-            });
-        }
-
-        private void TalentBuildBgWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            DataFetcher.FetchTalentBuilds(sender, e);
-        }
-        private void TalentBuildBgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            ProgressBar.Value = e.ProgressPercentage;
-            ProgressBar.Update();
-            StatusLbl.Text = e.UserState.ToString();
-        }
-
-        private void TalentBuildBgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            ProgressBar.Value = 0;
-            EnableButtons(false);
-            var heroes = HeroesBox.CheckedItems.Cast<string>().ToList();
-            StatusLbl.Text = "Generating TalentBuilds.txt";
-            using (var db = new HOTSTalentBuildContext())
-            {
-                var talentBuilds = db.Heroes.Where(h => heroes.Contains(h.Name)).Select(h => h.TalentBuilds).ToList();
-                var talentBuildsString = string.Join(Environment.NewLine, talentBuilds.Select(t =>
+                string talentBuildsString = string.Join(Environment.NewLine, HeroeIds.Select(h =>
                 {
-                    var list = t.OrderByDescending(b => b.Wins).ThenByDescending(b => b.TotalGames).Take(SettingsInstance.SelectedNumberOfBuilds).ToList();
-                    var heroID = list[0].HeroID;
-                    return $"{heroID}=Build1|{list[0].Build}" +
-                    $"|{(list.ElementAtOrDefault(1) == null ? "\"\"" : list[1].Build)}" +
-                    $"|{(list.ElementAtOrDefault(2) == null ? "\"\"" : list[2].Build)}" +
-                    $"|{Constants.HeroStringLookup[heroID]}";
+                    var currentBuild = CurrentBuilds[account].Where(c => c.HeroID == h).Select(c => c).FirstOrDefault();
+                    var build1 = builds1 != null && builds1.Any(b=> b.HeroID == h) ? builds1.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build1;
+                    var build2 = builds2 != null && builds1.Any(b => b.HeroID == h) ? builds2.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build2;
+                    var build3 = builds3 != null && builds1.Any(b => b.HeroID == h) ? builds3.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build3;
+
+                    return $"{h}={currentBuild.Selected ?? "Build1"}" +
+                    $"|{build1}" +
+                    $"|{build2}" +
+                    $"|{build3}" +
+                    $"|{LibConstants.HeroStringLookup[h]}";
                 }));
-
-                foreach (var account in Directory.GetDirectories(Constants.HOTSDocumentPath))
-                {
-                    using var stream = new StreamWriter($"{account}\\TalentBuilds.txt", false);
-                    stream.Write(talentBuildsString);
-                }
+                using var stream = new StreamWriter($"{account}\\TalentBuilds.txt", false);
+                stream.Write(talentBuildsString);
             }
-            StatusLbl.Text = Constants.DefaultStatus;
-            EnableButtons(true);
-        }
-        private void EnableButtons(bool enable)
-        {
-            ImportBtn.Enabled = enable;
-            CancelBtn.Enabled = !enable;
         }
 
         private void RanksBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,40 +139,7 @@ namespace HOTS_TalentBuild_Importer
 
 
 
-        private void MainForm_Load(object sender, EventArgs e)
-        { 
-            var lastUpdated = DateTime.MinValue;
-            using (var db = new HOTSTalentBuildContext())
-            {
-                db.Database.EnsureCreated();
-                lastUpdated = db.GeneralDatas.Where(g => g.Name == Versions.ModelName).Select(d => d.LastUpdated).FirstOrDefault();
-            }
-            if (lastUpdated.AddDays(7) < DateTime.Now) DataFetcher.FetchVersions();
 
-            using (var db = new HOTSTalentBuildContext())
-            {
-                var versions = db.MinorVersions.Select(v => v.VersionID).OrderByDescending(v => v).ToArray();
-                var heroes = db.Heroes.Select(h => h.Name).OrderBy(h => h).ToArray();
-                HeroesBox.Items.AddRange(heroes);
-            }
-            LoadSettings();
-        }
-
-        private void HeroUpdateBtn_Click(object sender, EventArgs e)
-        {
-            EnableButtons(false);
-            StatusLbl.Text = "Extracting Hero Data (See Command Prompt For Progress)";
-            //DataFetcher.FetchHeroes();
-            StatusLbl.Text = Constants.DefaultStatus;
-            using (var db = new HOTSTalentBuildContext())
-            {
-                HeroesBox.Items.Clear();
-                var heroes = db.Heroes.Select(h => h.Name).OrderBy(h => h).ToArray();
-                HeroesBox.Items.AddRange(heroes);
-            }
-            AllHeroesChkBox.Checked = true;
-            EnableButtons(true);
-        }
 
         private void AllHeroesChkBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -173,16 +162,15 @@ namespace HOTS_TalentBuild_Importer
             BackupTalentBuilds();
         }
         private void BackupTalentBuilds()
-        {
-            StatusLbl.Text = "Backing Up TalentBuild.txt";
-            foreach (var account in Directory.GetDirectories(Constants.HOTSDocumentPath))
+        { 
+            foreach (var account in Directory.GetDirectories(LibConstants.HOTSDocumentPath))
             {
                 if (File.Exists($"{account}\\TalentBuilds.txt"))
                 {
                     File.Copy($"{account}\\TalentBuilds.txt", $"{account}\\TalentBuilds.backup-{DateTime.Now:yyyyMMddHHmmss}.txt");
                 }
             }
-            StatusLbl.Text = Constants.DefaultStatus;
+            //StatusLbl.Text = Constants.DefaultStatus;
         }
 
         private void SelectAllHeroes(bool check)
@@ -193,7 +181,8 @@ namespace HOTS_TalentBuild_Importer
                 HeroesBox.SetItemChecked(i, check);
             }
             HeroesBox.SelectedIndexChanged += HeroesBox_SelectedIndexChanged;
-        } 
+        }
+
         private void LoadSettings()
         {
             if (SettingsInstance.SelectedHeroes[0] == "ALL")
@@ -211,7 +200,6 @@ namespace HOTS_TalentBuild_Importer
                     }
                 }
             }
-            VersionTypeBox.Text = SettingsInstance.SelectedVersion;
             for (var i = 0; i < RanksBox.Items.Count; ++i)
             {
                 if (SettingsInstance.SelectedRanks.Contains(RanksBox.Items[i].ToString()))
@@ -219,23 +207,15 @@ namespace HOTS_TalentBuild_Importer
                     RanksBox.SetItemChecked(i, true);
                 }
             }
-            NrBuildsBox.Text = SettingsInstance.SelectedNumberOfBuilds.ToString();
+            Build1Box.Text = SettingsInstance.Builds[0];
+            Build2Box.Text = SettingsInstance.Builds[1];
+            Build3Box.Text = SettingsInstance.Builds[2];
         }
 
-        private void VersionTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void BuildBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SettingsInstance.SelectedVersion = VersionTypeBox.Text;
-        }
-
-        private void NrBuildsBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SettingsInstance.SelectedNumberOfBuilds = int.Parse(NrBuildsBox.Text);
-        }
-
-        private void CancelBtn_Click(object sender, EventArgs e)
-        {
-            StatusLbl.Text += " - Cancelling...";
-            TalentBuildBgWorker.CancelAsync();
+            var cbx = (ComboBox)sender;
+            SettingsInstance.Builds = new string[] { Build1Box.Text, Build2Box.Text, Build3Box.Text};
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SchtenksFramework.Services;
+﻿using HOTS_TalentBuild_Lib;
+using SchtenksFramework.Services;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -10,17 +11,18 @@ namespace HOTS_TalentBuild_Importer
     {
         public string ConnectionString { get; set; }
         public string[] SelectedHeroes { get; set; }
-        public string SelectedVersion { get; set; }
         public string[] SelectedRanks { get; set; }
-        public int SelectedNumberOfBuilds {get; set; }
+        public string[] Builds {get; set; }
+
 
         public override void SetDefaults()
         {
-            ConnectionString = "server=steinwalls.synology.me;user id=root;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=FktP^7Ls^pa!J4^!2TYJ;";
+            ConnectionString = "server=steinwalls.synology.me;user id=ImporterUser;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=ag@R5uCieq&%ENcC5Ehs;";
             SelectedHeroes = new string[] { "ALL" };
-            SelectedVersion = "Minor";
             SelectedRanks = new string[] { "Master", "Diamond", "Platinum" };
-            SelectedNumberOfBuilds = 3;
+            Builds = new string[] { Constants.Unchanged,
+                Constants.Unchanged,
+                Constants.Unchanged };
         }
     }
 }
