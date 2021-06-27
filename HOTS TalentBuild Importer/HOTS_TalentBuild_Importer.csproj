@@ -53,8 +53,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="nuget pack $(TargetName).nuspec -Version $(PackageVersion) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
-    <Exec Command="squirrel --releasify $(OutDir)$(TargetName).$(PackageVersion).nupkg" />
+    <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;nuget pack $(TargetName).nuspec -Version $(PackageVersion) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)&#xD;&#xA;squirrel --releasify $(OutDir)$(TargetName).$(PackageVersion).nupkg&#xD;&#xA;)" />
   </Target>
   
 </Project>
