@@ -36,6 +36,7 @@ namespace HOTS_TalentBuild_Importer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Text = $"HOTS TalentBuild Importer {ProductVersion}";
             using (var db = new HOTSTalentBuildContext())
             {
                 HeroesBox.Items.AddRange(db.Heroes.Select(h => h.Name).ToArray());
@@ -181,7 +182,6 @@ namespace HOTS_TalentBuild_Importer
                     File.Copy($"{account}\\TalentBuilds.txt", $"{account}\\TalentBuilds.backup-{DateTime.Now:yyyyMMddHHmmss}.txt");
                 }
             }
-            //StatusLbl.Text = Constants.DefaultStatus;
         }
 
         private void SelectAllHeroes(bool check)
