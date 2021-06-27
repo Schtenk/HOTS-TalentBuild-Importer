@@ -10,6 +10,8 @@ using System.Threading;
 using System.Windows.Forms;
 using static SchtenksFramework.Services.Settings<HOTS_TalentBuild_Importer.HOTSTalentBuildSettings>;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Squirrel;
 
 namespace HOTS_TalentBuild_Importer
 {
@@ -30,7 +32,7 @@ namespace HOTS_TalentBuild_Importer
             public string Build3 = "\"\"";
         }
 
-        Dictionary<string, List<Build>> CurrentBuilds = new Dictionary<string, List<Build>>();
+        readonly Dictionary<string, List<Build>>  CurrentBuilds = new Dictionary<string, List<Build>>();
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -71,6 +73,15 @@ namespace HOTS_TalentBuild_Importer
             Build1Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
             Build2Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
             Build3Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
+
+           CheckForUpdates();
+        }
+
+        private async Task CheckForUpdates()
+        {
+            using var manager = UpdateManager.GitHubUpdateManager("https://github.com/Schtenk/HOTS-TalentBuild-Importer");
+            await manager.Result.UpdateApp();
+            
         }
 
         private void ImportBtn_Click(object sender, EventArgs e)
@@ -214,7 +225,6 @@ namespace HOTS_TalentBuild_Importer
 
         private void BuildBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cbx = (ComboBox)sender;
             SettingsInstance.Builds = new string[] { Build1Box.Text, Build2Box.Text, Build3Box.Text};
         }
     }

@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>HOTS_TalentBuild_Importer</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageIcon>storm_ui_mvp_mvp_gold.png</PackageIcon>
+    <PackageIconUrl />
+    <Version>1.0.0</Version>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Authors>Schtenk</Authors>
+    <Company />
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AssemblyName>HOTS_TalentBuild_Importer</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NuGet.CommandLine" Version="5.9.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PostSharp" Version="6.9.6" />
+    <PackageReference Include="ppy.squirrel.windows" Version="1.9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Pack="True" Include="..\..\HOTS_TalentBuild_Lib\HOTS_TalentBuild_Lib\HOTS_TalentBuild_Lib.csproj">
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SchtenksFramework\SchtenksFramework\SchtenksFramework.csproj">
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Releases\" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="nuget pack $(TargetName).nuspec -Version $(PackageVersion) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
+    <Exec Command="squirrel --releasify $(OutDir)$(TargetName).$(PackageVersion).nupkg" />
+  </Target>
+  
+</Project>
