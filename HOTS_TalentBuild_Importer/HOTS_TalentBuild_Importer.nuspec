@@ -9,7 +9,9 @@
     <description>Imports TalentBuilds to Heroes of the Storm</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright></copyright>
-    <dependencies />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1" />
+    </dependencies>
   </metadata>
   <files>
     <file src="*.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>

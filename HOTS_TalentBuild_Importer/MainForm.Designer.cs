@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ImportBtn = new System.Windows.Forms.Button();
             this.TimeframeLbl = new System.Windows.Forms.Label();
@@ -44,6 +45,7 @@
             this.Build2Box = new System.Windows.Forms.ComboBox();
             this.BuildLbl1 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,6 +208,12 @@
             this.label1.Text = "\"Unchanged\" option will set Build# to what it was in \"TalentBuilds.txt\" when this" +
     " program started.";
             // 
+            // UpdateTimer
+            // 
+            this.UpdateTimer.Enabled = true;
+            this.UpdateTimer.Interval = 1800000;
+            this.UpdateTimer.Tick += new System.EventHandler(this.CheckForUpdates);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -248,6 +256,7 @@
         private System.Windows.Forms.Label Build2Lbl;
         private System.Windows.Forms.ComboBox Build2Box;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer UpdateTimer;
     }
 }
 

@@ -74,15 +74,28 @@ namespace HOTS_TalentBuild_Importer
             Build1Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
             Build2Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
             Build3Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
-
-           CheckForUpdates();
+            
+            CheckForUpdates(null, null);
         }
 
-        private async Task CheckForUpdates()
+        async void CheckForUpdates(object sender, EventArgs e)
         {
-            using var manager = UpdateManager.GitHubUpdateManager("https://github.com/Schtenk/HOTS-TalentBuild-Importer");
-            await manager.Result.UpdateApp();
-            
+            await Task.Factory.StartNew(async () => {
+                try
+                {
+                    using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/Schtenk/HOTS-TalentBuild-Importer", Application.ProductName))
+                    {
+                        var test = await updateManager.UpdateApp((int i) => {
+                            var sdfjhsd = updateManager;
+                            var asd = i;
+                        });
+                    }
+                }
+                catch (Exception e)
+                {
+                    var jhdfbls = e;
+                }
+            });
         }
 
         private void ImportBtn_Click(object sender, EventArgs e)
