@@ -32,12 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Pack="True" Include="..\..\HOTS_TalentBuild_Lib\HOTS_TalentBuild_Lib\HOTS_TalentBuild_Lib.csproj">
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\..\SchtenksFramework\SchtenksFramework\SchtenksFramework.csproj">
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\HOTS_TalentBuild_Lib\HOTS_TalentBuild_Lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

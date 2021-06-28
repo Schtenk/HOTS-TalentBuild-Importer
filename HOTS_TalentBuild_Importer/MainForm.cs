@@ -26,7 +26,7 @@ namespace HOTS_TalentBuild_Importer
         class Build
         {
             public string HeroID;
-            public string Selected;
+            public string Selected = "Build1";
             public string Build1 = "\"\"";
             public string Build2 = "\"\"";
             public string Build3 = "\"\"";
@@ -122,10 +122,12 @@ namespace HOTS_TalentBuild_Importer
             {
                 string talentBuildsString = string.Join(Environment.NewLine, HeroeIds.Select(h =>
                 {
-                    var currentBuild = CurrentBuilds[account].Where(c => c.HeroID == h).Select(c => c).FirstOrDefault();
+                    var currentBuild = CurrentBuilds[account].Where(c => c.HeroID == h).Select(c => c).FirstOrDefault() ?? new Build {
+                        HeroID = h
+                    };
                     var build1 = builds1 != null && builds1.Any(b=> b.HeroID == h) ? builds1.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build1;
-                    var build2 = builds2 != null && builds1.Any(b => b.HeroID == h) ? builds2.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build2;
-                    var build3 = builds3 != null && builds1.Any(b => b.HeroID == h) ? builds3.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build3;
+                    var build2 = builds2 != null && builds2.Any(b => b.HeroID == h) ? builds2.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build2;
+                    var build3 = builds3 != null && builds3.Any(b => b.HeroID == h) ? builds3.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build3;
 
                     return $"{h}={currentBuild.Selected ?? "Build1"}" +
                     $"|{build1}" +
