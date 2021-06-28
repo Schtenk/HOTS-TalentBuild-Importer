@@ -85,15 +85,12 @@ namespace HOTS_TalentBuild_Importer
                 {
                     using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/Schtenk/HOTS-TalentBuild-Importer", Application.ProductName))
                     {
-                        var test = await updateManager.UpdateApp((int i) => {
-                            var sdfjhsd = updateManager;
-                            var asd = i;
+                        var result = await updateManager.UpdateApp((int i) => {
                         });
                     }
                 }
                 catch (Exception e)
                 {
-                    var jhdfbls = e;
                 }
             });
         }
