@@ -80,13 +80,38 @@ namespace HOTS_TalentBuild_Importer
 
         async void CheckForUpdates(object sender, EventArgs e)
         {
-            await Task.Factory.StartNew(async () => {
+            StatusLabel.Text = "Checking for updates...";
+            await Task.Factory.StartNew(async () =>
+            {
                 try
                 {
                     using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/Schtenk/HOTS-TalentBuild-Importer", Application.ProductName))
                     {
-                        var result = await updateManager.UpdateApp((int i) => {
+                        var result = await updateManager.UpdateApp((int i) =>
+                        {
+                            BeginInvoke(new MethodInvoker(delegate
+                            {
+                                StatusLabel.Text = "Updating...";
+                                ProgressBar.Value = i;
+                            }));
                         });
+                        if (result != null)
+                        {
+                            BeginInvoke(new MethodInvoker(delegate
+                            {
+                                StatusLabel.Text = "Update done, please restart program!";
+                                StatusLabel.ForeColor = System.Drawing.Color.Green;
+                                ProgressBar.Value = 100;
+                            }));
+                        }
+                        else
+                        {
+                            BeginInvoke(new MethodInvoker(delegate
+                            {
+                                StatusLabel.Text = "Program is up to date.";
+                                ProgressBar.Value = 0;
+                            }));
+                        }
                     }
                 }
                 catch (Exception e)
@@ -113,19 +138,48 @@ namespace HOTS_TalentBuild_Importer
                 MessageBox.Show("No Ranks Selected!");
                 return;
             }
+
+            FetcherWorker.DoWork += FetcherWorker_DoWork;
+            FetcherWorker.RunWorkerCompleted += FetcherWorker_RunWorkerCompleted;
+            FetcherWorker.ProgressChanged += FetcherWorker_ProgressChanged;
+
+            FetcherWorker.RunWorkerAsync( Tuple.Create(Build1Box.Text, Build2Box.Text, Build3Box.Text, heroes, ranks));
+            
+        }
+
+        private void FetcherWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            var argument = (Tuple<string, string ,string,List<string>, List<string>>)e.Argument;
+            var heroes = argument.Item4;
+            var ranks = argument.Item5;
+            worker.ReportProgress(0, "Importing Build 1:");
+            var builds1 = TalentBuildFetcher.FetchTalentBuilds(worker, argument.Item1, heroes, ranks);
+            worker.ReportProgress(0, "Importing Build 2:");
+            var builds2 = TalentBuildFetcher.FetchTalentBuilds(worker, argument.Item2, heroes, ranks);
+            worker.ReportProgress(0, "Importing Build 3:");
+            var builds3 = TalentBuildFetcher.FetchTalentBuilds(worker, argument.Item3, heroes, ranks);
+            e.Result = Tuple.Create(builds1, builds2, builds3);
+            worker.ReportProgress(100, "Import done!");
+        }
+
+        private void FetcherWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var result = (Tuple<List<TalentBuild>, List<TalentBuild>, List<TalentBuild>>)e.Result;
+            var builds1 = result.Item1;
+            var builds2 = result.Item2;
+            var builds3 = result.Item3;
             using var db = new HOTSTalentBuildContext();
             var HeroeIds = db.Heroes.Select(h => h.HeroID).ToList();
-            var builds1 = TalentBuildFetcher.FetchTalentBuilds(Build1Box.Text, heroes, ranks);
-            var builds2 = TalentBuildFetcher.FetchTalentBuilds(Build2Box.Text, heroes, ranks);
-            var builds3 = TalentBuildFetcher.FetchTalentBuilds(Build3Box.Text, heroes, ranks);
             foreach (var account in Directory.GetDirectories(LibConstants.HOTSDocumentPath))
             {
                 string talentBuildsString = string.Join(Environment.NewLine, HeroeIds.Select(h =>
                 {
-                    var currentBuild = CurrentBuilds[account].Where(c => c.HeroID == h).Select(c => c).FirstOrDefault() ?? new Build {
+                    var currentBuild = CurrentBuilds[account].Where(c => c.HeroID == h).Select(c => c).FirstOrDefault() ?? new Build
+                    {
                         HeroID = h
                     };
-                    var build1 = builds1 != null && builds1.Any(b=> b.HeroID == h) ? builds1.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build1;
+                    var build1 = builds1 != null && builds1.Any(b => b.HeroID == h) ? builds1.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build1;
                     var build2 = builds2 != null && builds2.Any(b => b.HeroID == h) ? builds2.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build2;
                     var build3 = builds3 != null && builds3.Any(b => b.HeroID == h) ? builds3.Where(b => b.HeroID == h).FirstOrDefault().Build : currentBuild.Build3;
 
@@ -139,13 +193,16 @@ namespace HOTS_TalentBuild_Importer
                 stream.Write(talentBuildsString);
             }
         }
+        private void FetcherWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (e.UserState != null) StatusLabel.Text = e.UserState as string;
+            ProgressBar.Value = e.ProgressPercentage;
+        }
 
         private void RanksBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var chkListBox = (CheckedListBox)sender;
-            AllRanksChkBox.CheckedChanged -= AllRanksChkBox_CheckedChanged;
-            AllRanksChkBox.Checked = (chkListBox.CheckedItems.Count == chkListBox.Items.Count);
-            AllRanksChkBox.CheckedChanged += AllRanksChkBox_CheckedChanged;
+            CheckIfAllChecked(AllRanksChkBox, AllRanksChkBox_CheckedChanged, chkListBox);
             SettingsInstance.SelectedRanks = RanksBox.CheckedItems.Cast<string>().ToArray();
         }
 
@@ -161,10 +218,6 @@ namespace HOTS_TalentBuild_Importer
             SettingsInstance.SelectedRanks = RanksBox.CheckedItems.Cast<string>().ToArray();
         }
 
-
-
-
-
         private void AllHeroesChkBox_CheckedChanged(object sender, EventArgs e)
         {
             var chkBox = (CheckBox)sender;
@@ -172,12 +225,17 @@ namespace HOTS_TalentBuild_Importer
             SettingsInstance.SelectedHeroes = (HeroesBox.CheckedItems.Count == HeroesBox.Items.Count) ? new string[] { "ALL" } : HeroesBox.CheckedItems.Cast<string>().ToArray();
         }
 
+        private void CheckIfAllChecked(CheckBox checkBox, EventHandler checkedChanged, CheckedListBox listBox)
+        {
+            checkBox.CheckedChanged -= checkedChanged;
+            checkBox.Checked = (listBox.CheckedItems.Count == listBox.Items.Count);
+            checkBox.CheckedChanged += checkedChanged;
+        }
+
         private void HeroesBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var chkListBox = (CheckedListBox)sender;
-            AllHeroesChkBox.CheckedChanged -= AllHeroesChkBox_CheckedChanged;
-            AllHeroesChkBox.Checked = (chkListBox.CheckedItems.Count == chkListBox.Items.Count);
-            AllHeroesChkBox.CheckedChanged += AllHeroesChkBox_CheckedChanged;
+            CheckIfAllChecked(AllHeroesChkBox, AllHeroesChkBox_CheckedChanged, chkListBox);
             SettingsInstance.SelectedHeroes = (HeroesBox.CheckedItems.Count == HeroesBox.Items.Count) ? new string[] { "ALL" } : HeroesBox.CheckedItems.Cast<string>().ToArray();
         }
 
@@ -233,6 +291,8 @@ namespace HOTS_TalentBuild_Importer
             Build1Box.Text = SettingsInstance.Builds[0];
             Build2Box.Text = SettingsInstance.Builds[1];
             Build3Box.Text = SettingsInstance.Builds[2];
+            CheckIfAllChecked(AllHeroesChkBox, AllHeroesChkBox_CheckedChanged, HeroesBox);
+            CheckIfAllChecked(AllRanksChkBox, AllRanksChkBox_CheckedChanged, RanksBox);
         }
 
         private void BuildBox_SelectedIndexChanged(object sender, EventArgs e)

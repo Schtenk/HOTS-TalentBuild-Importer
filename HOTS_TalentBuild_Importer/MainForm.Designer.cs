@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ImportBtn = new System.Windows.Forms.Button();
             this.TimeframeLbl = new System.Windows.Forms.Label();
@@ -45,7 +44,9 @@
             this.Build2Box = new System.Windows.Forms.ComboBox();
             this.BuildLbl1 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.FetcherWorker = new System.ComponentModel.BackgroundWorker();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.StatusLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             this.ImportBtn.Location = new System.Drawing.Point(297, 314);
             this.ImportBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ImportBtn.Name = "ImportBtn";
-            this.ImportBtn.Size = new System.Drawing.Size(224, 53);
+            this.ImportBtn.Size = new System.Drawing.Size(225, 53);
             this.ImportBtn.TabIndex = 0;
             this.ImportBtn.Text = "Import";
             this.ImportBtn.UseVisualStyleBackColor = true;
@@ -74,7 +75,7 @@
             this.AllRanksChkBox.Location = new System.Drawing.Point(297, 10);
             this.AllRanksChkBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.AllRanksChkBox.Name = "AllRanksChkBox";
-            this.AllRanksChkBox.Size = new System.Drawing.Size(224, 27);
+            this.AllRanksChkBox.Size = new System.Drawing.Size(225, 27);
             this.AllRanksChkBox.TabIndex = 0;
             this.AllRanksChkBox.Text = "All Ranks";
             this.AllRanksChkBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,7 +123,7 @@
             this.RanksBox.Location = new System.Drawing.Point(297, 44);
             this.RanksBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.RanksBox.Name = "RanksBox";
-            this.RanksBox.Size = new System.Drawing.Size(224, 94);
+            this.RanksBox.Size = new System.Drawing.Size(225, 94);
             this.RanksBox.TabIndex = 0;
             this.RanksBox.SelectedIndexChanged += new System.EventHandler(this.RanksBox_SelectedIndexChanged);
             // 
@@ -208,17 +209,32 @@
             this.label1.Text = "\"Unchanged\" option will set Build# to what it was in \"TalentBuilds.txt\" when this" +
     " program started.";
             // 
-            // UpdateTimer
+            // FetcherWorker
             // 
-            this.UpdateTimer.Enabled = true;
-            this.UpdateTimer.Interval = 1800000;
-            this.UpdateTimer.Tick += new System.EventHandler(this.CheckForUpdates);
+            this.FetcherWorker.WorkerReportsProgress = true;
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(297, 567);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(225, 23);
+            this.ProgressBar.TabIndex = 21;
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Location = new System.Drawing.Point(297, 549);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(0, 15);
+            this.StatusLabel.TabIndex = 22;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 661);
+            this.Controls.Add(this.StatusLabel);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BackupBtn);
@@ -236,6 +252,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -256,7 +273,9 @@
         private System.Windows.Forms.Label Build2Lbl;
         private System.Windows.Forms.ComboBox Build2Box;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer UpdateTimer;
+        private System.ComponentModel.BackgroundWorker FetcherWorker;
+        private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.Label StatusLabel;
     }
 }
 
