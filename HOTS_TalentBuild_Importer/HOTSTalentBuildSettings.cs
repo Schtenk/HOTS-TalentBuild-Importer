@@ -17,7 +17,7 @@ namespace HOTS_TalentBuild_Importer
 
         public override void SetDefaults()
         {
-            ConnectionString = "server=steinwalls.synology.me;user id=ImporterUser;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=ag@R5uCieq&%ENcC5Ehs;";
+            ConnectionString = "server=schtenks.synology.me;user id=ImporterUser;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=ag@R5uCieq&%ENcC5Ehs;";
             SelectedHeroes = new string[] { "ALL" };
             SelectedRanks = new string[] { "Master", "Diamond", "Platinum" };
             Builds = new string[] { Constants.Unchanged,
