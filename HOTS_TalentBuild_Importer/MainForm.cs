@@ -36,6 +36,7 @@ namespace HOTS_TalentBuild_Importer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            CheckForUpdates(null, null);
             Text = $"HOTS TalentBuild Importer {ProductVersion}";
             using (var db = new HOTSTalentBuildContext())
             {
@@ -74,8 +75,6 @@ namespace HOTS_TalentBuild_Importer
             Build1Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
             Build2Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
             Build3Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
-            
-            CheckForUpdates(null, null);
         }
 
         async void CheckForUpdates(object sender, EventArgs e)
