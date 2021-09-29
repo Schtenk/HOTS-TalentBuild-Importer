@@ -9,7 +9,6 @@ namespace HOTS_TalentBuild_Importer
 {
     public class HOTSTalentBuildSettings: Settings<HOTSTalentBuildSettings>
     {
-        public string ConnectionString { get; set; }
         public string[] SelectedHeroes { get; set; }
         public string[] SelectedRanks { get; set; }
         public string[] Builds {get; set; }
@@ -17,7 +16,6 @@ namespace HOTS_TalentBuild_Importer
 
         public override void SetDefaults()
         {
-            ConnectionString = "server=schtenks.synology.me;user id=ImporterUser;persistsecurityinfo=True;port=3307;database=HOTSTalentBuildData;password=ag@R5uCieq&%ENcC5Ehs;";
             SelectedHeroes = new string[] { "ALL" };
             SelectedRanks = new string[] { "Master", "Diamond", "Platinum" };
             Builds = new string[] { Constants.Unchanged,
