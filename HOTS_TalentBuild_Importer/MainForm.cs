@@ -12,6 +12,8 @@ using static SchtenksFramework.Services.Settings<HOTS_TalentBuild_Importer.HOTST
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Squirrel;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace HOTS_TalentBuild_Importer
 {
@@ -20,7 +22,6 @@ namespace HOTS_TalentBuild_Importer
         public MainForm()
         {
             InitializeComponent();
-            HOTSTalentBuildContext.ConnectionString = SettingsInstance.ConnectionString;
         }
 
         class Build
@@ -38,10 +39,8 @@ namespace HOTS_TalentBuild_Importer
         {
             CheckForUpdates(null, null);
             Text = $"HOTS TalentBuild Importer {ProductVersion}";
-            using (var db = new HOTSTalentBuildContext())
-            {
-                HeroesBox.Items.AddRange(db.Heroes.Select(h => h.Name).ToArray());
-            }
+            HeroData.FetchData();
+            HeroesBox.Items.AddRange(HeroData.Heroes.Select(h => h.Name).ToArray());
 
             RanksBox.Items.AddRange(LibConstants.Ranks.ToArray());
 
@@ -168,8 +167,7 @@ namespace HOTS_TalentBuild_Importer
             var builds1 = result.Item1;
             var builds2 = result.Item2;
             var builds3 = result.Item3;
-            using var db = new HOTSTalentBuildContext();
-            var HeroeIds = db.Heroes.Select(h => h.HeroID).ToList();
+            var HeroeIds = HeroData.Heroes.Select(h => h.HeroID).ToList();
             foreach (var account in Directory.GetDirectories(LibConstants.HOTSDocumentPath))
             {
                 string talentBuildsString = string.Join(Environment.NewLine, HeroeIds.Select(h =>
