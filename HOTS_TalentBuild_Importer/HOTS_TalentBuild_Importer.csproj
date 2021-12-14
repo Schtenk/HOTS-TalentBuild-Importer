@@ -8,7 +8,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>storm_ui_mvp_mvp_gold.png</PackageIcon>
     <PackageIconUrl />
-    <Version>1.0.7</Version>
+    <Version>1.1.0</Version>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Authors>Schtenk</Authors>
     <Company />
