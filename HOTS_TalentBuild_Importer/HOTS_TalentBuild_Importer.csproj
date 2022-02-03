@@ -8,12 +8,13 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>storm_ui_mvp_mvp_gold.png</PackageIcon>
     <PackageIconUrl />
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Authors>Schtenk</Authors>
     <Company />
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <AssemblyName>HOTS_TalentBuild_Importer</AssemblyName>
+    <PackageId>$(TargetName)</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
