@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Squirrel;
 using System.Net.Http.Headers;
 using System.Net;
+using Squirrel.Sources;
 
 namespace HOTS_TalentBuild_Importer
 {
@@ -37,7 +38,13 @@ namespace HOTS_TalentBuild_Importer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            CheckForUpdates(null, null);
+
+            SquirrelAwareApp.HandleEvents(
+                onInitialInstall: OnAppInstall,
+                onAppUninstall: OnAppUninstall,
+                onEveryRun: OnAppRun);
+
+            CheckForUpdate();
             Text = $"HOTS TalentBuild Importer {ProductVersion}";
             HeroData.FetchData();
             HeroesBox.Items.AddRange(HeroData.Heroes.Select(h => h.Name).ToArray());
@@ -76,47 +83,107 @@ namespace HOTS_TalentBuild_Importer
             Build3Box.SelectedIndexChanged += BuildBox_SelectedIndexChanged;
         }
 
-        async void CheckForUpdates(object sender, EventArgs e)
+        private void OnAppRun(SemanticVersion version, IAppTools tools, bool firstRun)
+        {
+            tools.SetProcessAppUserModelId();
+        }
+        private void OnAppInstall(SemanticVersion version, IAppTools tools)
+        {
+            tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+        }
+
+        private void OnAppUninstall(SemanticVersion version, IAppTools tools)
+        {
+            tools.RemoveShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
+            
+        }
+
+
+
+        private async Task CheckForUpdate()
         {
             StatusLabel.Text = "Checking for updates...";
-            await Task.Factory.StartNew(async () =>
+            try
             {
-                try
+                using var updateManager = new GithubUpdateManager("http://github.com/Schtenk/HOTS-TalentBuild-Importer");
+                var result = await updateManager.UpdateApp((int i) =>
                 {
-                    using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/Schtenk/HOTS-TalentBuild-Importer", Application.ProductName))
+                    BeginInvoke(new MethodInvoker(delegate
                     {
-                        var result = await updateManager.UpdateApp((int i) =>
-                        {
-                            BeginInvoke(new MethodInvoker(delegate
-                            {
-                                StatusLabel.Text = "Updating...";
-                                ProgressBar.Value = i;
-                            }));
-                        });
-                        if (result != null)
-                        {
-                            BeginInvoke(new MethodInvoker(delegate
-                            {
-                                StatusLabel.Text = "Update done, please restart program!";
-                                StatusLabel.ForeColor = System.Drawing.Color.Green;
-                                ProgressBar.Value = 100;
-                            }));
-                        }
-                        else
-                        {
-                            BeginInvoke(new MethodInvoker(delegate
-                            {
-                                StatusLabel.Text = "Program is up to date.";
-                                ProgressBar.Value = 0;
-                            }));
-                        }
-                    }
-                }
-                catch (Exception e)
+                        StatusLabel.Text = "Updating...";
+                        ProgressBar.Value = i;
+                    }));
+                });
+                if (result != null)
                 {
+                    BeginInvoke(new MethodInvoker(delegate
+                    {
+                        StatusLabel.Text = "Update Installed!";
+                        StatusLabel.ForeColor = System.Drawing.Color.Green;
+                        RestartBtn.Enabled = true;
+                        RestartBtn.Visible = true;
+                        RestartBtn.Click += (object sender, EventArgs e) =>
+                        {
+                            UpdateManager.RestartApp();
+                        };
+                    }));
                 }
-            });
+                else
+                {
+                    BeginInvoke(new MethodInvoker(delegate
+                    {
+                        StatusLabel.Text = "Program is up to date.";
+                        ProgressBar.Value = 0;
+                    }));
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
         }
+        //async void test(object sender, EventArgs e)
+        //{
+        //    StatusLabel.Text = "Checking for updates...";
+        //    await Task.Factory.StartNew(async () =>
+        //    {
+        //        try
+        //        {
+        //            using (var updateManager =  new UpdateManager(new GithubSource("https://github.com/Schtenk/HOTS-TalentBuild-Importer", null, false)))
+        //            {
+        //                var result = await updateManager.UpdateApp((int i) =>
+        //                {
+        //                    BeginInvoke(new MethodInvoker(delegate
+        //                    {
+        //                        StatusLabel.Text = "Updating...";
+        //                        ProgressBar.Value = i;
+        //                    }));
+        //                });
+        //                if (result != null)
+        //                {
+        //                    BeginInvoke(new MethodInvoker(delegate
+        //                    {
+        //                        StatusLabel.Text = "Update done, please restart program!";
+        //                        StatusLabel.ForeColor = System.Drawing.Color.Green;
+        //                        ProgressBar.Value = 100;
+        //                    }));
+        //                }
+        //                else
+        //                {
+        //                    BeginInvoke(new MethodInvoker(delegate
+        //                    {
+        //                        StatusLabel.Text = "Program is up to date.";
+        //                        ProgressBar.Value = 0;
+        //                    }));
+        //                }
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //        }
+        //    });
+        //}
 
         private void ImportBtn_Click(object sender, EventArgs e)
         {

@@ -47,6 +47,7 @@
             this.FetcherWorker = new System.ComponentModel.BackgroundWorker();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.StatusLabel = new System.Windows.Forms.Label();
+            this.RestartBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,11 +229,23 @@
             this.StatusLabel.Size = new System.Drawing.Size(0, 15);
             this.StatusLabel.TabIndex = 22;
             // 
+            // RestartBtn
+            // 
+            this.RestartBtn.Enabled = false;
+            this.RestartBtn.Location = new System.Drawing.Point(442, 541);
+            this.RestartBtn.Name = "RestartBtn";
+            this.RestartBtn.Size = new System.Drawing.Size(80, 23);
+            this.RestartBtn.TabIndex = 23;
+            this.RestartBtn.Text = "Restart Now";
+            this.RestartBtn.UseVisualStyleBackColor = true;
+            this.RestartBtn.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 661);
+            this.Controls.Add(this.RestartBtn);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.label1);
@@ -276,6 +289,7 @@
         private System.ComponentModel.BackgroundWorker FetcherWorker;
         private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Button RestartBtn;
     }
 }
 
