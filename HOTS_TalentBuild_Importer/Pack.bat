@@ -1,0 +1,1 @@
+﻿Squirrel pack --packId "$(TargetName)" --packVersion "$(PackageVersion)" --packDirectory "$(TargetDir)" --releaseDir "$(ProjectDir)Releases"

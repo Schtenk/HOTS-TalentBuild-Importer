@@ -15,6 +15,7 @@ using Squirrel;
 using System.Net.Http.Headers;
 using System.Net;
 using Squirrel.Sources;
+using SchtenksFramework.Helpers;
 
 namespace HOTS_TalentBuild_Importer
 {
@@ -38,7 +39,6 @@ namespace HOTS_TalentBuild_Importer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
             SquirrelAwareApp.HandleEvents(
                 onInitialInstall: OnAppInstall,
                 onAppUninstall: OnAppUninstall,
