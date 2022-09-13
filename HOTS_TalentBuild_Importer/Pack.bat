@@ -1,1 +1,1 @@
-﻿Squirrel pack --packId "$(TargetName)" --packVersion "$(PackageVersion)" --packDirectory "$(TargetDir)" --releaseDir "$(ProjectDir)Releases"
+﻿Squirrel pack --packId "$(TargetName)" --packVersion "$(PackageVersion)" --framework "6.0.2" --packDirectory "$(TargetDir)" --releaseDir "$(ProjectDir)Releases"
